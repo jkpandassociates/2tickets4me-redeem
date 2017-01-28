@@ -1,0 +1,43 @@
+{
+  "name": "websitemonitor",
+  "version": "0.1.0",
+  "description": "",
+  "main": "app/run.js",
+  "engines": {
+    "node": "~6.9.0",
+    "npm": "~3.10.3"
+  },
+  "scripts": {
+    "postinstall": "yarn run build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config server/webpack.config.js",
+    "build:release": "webpack --config server/webpack.config.js --release",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+  },
+  "keywords": [],
+  "author": "Ken Howard <ken@simplicated.com>",
+  "license": "ISC",
+  "homepage": "https://github.com/kenhowardpdx/2tickets4me-redeem#readme",
+  "devDependencies": {
+    "@types/node": "^6.0.52",
+    "@types/sequelize": "^3.4.36",
+    "angular-cli": "^1.0.0-beta.26",
+    "conventional-changelog": "^1.1.0",
+    "cz-conventional-changelog": "^1.2.0",
+    "source-map-loader": "^0.1.6",
+    "ts-loader": "^2.0.0",
+    "typescript": "^2.1.5",
+    "webpack": "^1.14.0"
+  },
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "mysql": "^2.13.0",
+    "sequelize": "^3.30.0",
+    "sparkpost": "^2.1.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
