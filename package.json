@@ -10,9 +10,8 @@
   "scripts": {
     "postinstall": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./server/index.js",
-    "build": "webpack --config server/webpack.config.js",
-    "build:release": "webpack --config server/webpack.config.js --release",
+    "start": "node index.js",
+    "build": "tsc -p server",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "keywords": [],
@@ -20,20 +19,30 @@
   "license": "ISC",
   "homepage": "https://github.com/kenhowardpdx/2tickets4me-redeem#readme",
   "devDependencies": {
+    "@types/confidence": "^1.4.30",
+    "@types/hapi": "^16.0.0",
+    "@types/hapi-decorators": "^0.4.2",
     "@types/node": "^6.0.52",
     "@types/sequelize": "^3.4.36",
-    "angular-cli": "^1.0.0-beta.26",
+    "angular-cli": "^1.0.0-beta.28.3",
     "conventional-changelog": "^1.1.0",
     "cz-conventional-changelog": "^1.2.0",
     "source-map-loader": "^0.1.6",
     "ts-loader": "^2.0.0",
-    "typescript": "^2.1.5",
-    "webpack": "^1.14.0"
+    "typescript": "^2.1.5"
   },
   "dependencies": {
+    "confidence": "^3.0.2",
     "dotenv": "^4.0.0",
+    "glue": "^4.1.0",
+    "good": "^7.1.0",
+    "good-console": "^6.2.0",
+    "good-squeeze": "^5.0.1",
+    "hapi": "^16.1.0",
+    "hapi-decorators": "^0.4.3",
+    "inert": "^4.1.0",
     "mysql": "^2.13.0",
-    "sequelize": "^3.30.0",
+    "sequelize": "^3.30.1",
     "sparkpost": "^2.1.2"
   },
   "config": {
