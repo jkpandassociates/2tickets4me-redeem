@@ -10,6 +10,7 @@
   "scripts": {
     "postinstall": "yarn run build",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/index.js",
     "build": "webpack --config server/webpack.config.js",
     "build:release": "webpack --config server/webpack.config.js --release",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
