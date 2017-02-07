@@ -1,0 +1,72 @@
+import { IRouteConfiguration, Request, IReply } from 'hapi';
+import { controller, Controller, get, post, validate } from 'hapi-decorators';
+import * as Joi from 'joi';
+
+import { getDBContext, DbContext } from '../models';
+
+@controller('/api/orders')
+class OrdersController implements Controller {
+
+    private _db: DbContext;
+
+    constructor(getDBContext) {
+        this._db = getDBContext();
+    }
+
+    baseUrl: string;
+    routes: () => IRouteConfiguration[];
+
+    @get('/')
+    @validate({
+        query: Joi.object({
+            firstName: Joi.string(),
+            lastName: Joi.string(),
+            codeName: Joi.string(),
+            sponsor: Joi.string()
+        }).optionalKeys(['firstName', 'lastName', 'codeName', 'sponsor']).options({ stripUnknown: true })
+    })
+    getOrders(request: Request, reply: IReply) {
+        const {firstName, lastName, codeName, sponsor} = request.query;
+
+        const where: any = {};
+
+        if (firstName) {
+            where.FirstName = { $like: `${firstName}%` };
+        }
+        if (lastName) {
+            where.LastName = { $like: `${lastName}%` };
+        }
+        if (codeName) {
+            where.CodeName = { $like: `${codeName}%` };
+        }
+        if (sponsor) {
+            where.Sponsor = { $like: `${sponsor}%` };
+        }
+
+        this._db.Order.findAll({
+            where
+        }).then(orders => {
+            reply({ data: orders });
+        });
+    }
+
+    @post('/')
+    @validate({
+        payload: getDBContext().validations.Order.options({ stripUnknown: true }),
+
+    })
+    newOrder(request: Request, reply: IReply) {
+        const orderValues = request.payload;
+
+        orderValues.IPAddress = request.headers['x-forwarded-for'] || request.info.remoteAddress;
+
+        this._db.Order.create(orderValues)
+            .then(order => {
+                reply({ data: order });
+            }).catch(e => {
+                reply(e);
+            });
+    }
+}
+
+export const orderRoutes = new OrdersController(getDBContext).routes();

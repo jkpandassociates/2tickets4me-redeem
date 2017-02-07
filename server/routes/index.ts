@@ -2,7 +2,11 @@ import { Server } from 'hapi';
 import { join } from 'path';
 import { existsSync } from 'fs';
 
+import { orderRoutes } from '../controllers/orders.controller';
+
 export function register(server: Server, _, next) {
+
+    server.route(orderRoutes);
 
     server.route({
         method: 'GET',

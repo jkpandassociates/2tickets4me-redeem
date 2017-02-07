@@ -170,9 +170,19 @@
   version "2.5.38"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.38.tgz#a4379124c4921d4e21de54ec74669c9e9b356717"
 
+"@types/joi@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@types/joi/-/joi-10.0.0.tgz#cfc8ac03b6d9e89b31577d6742b3d489a7aefd9c"
+
 "@types/lodash@*":
   version "4.14.51"
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.51.tgz#8454ce32d367824e4e30d910a5c1a84c14e5626f"
+
+"@types/moment@^2.13.0":
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/@types/moment/-/moment-2.13.0.tgz#604ebd189bc3bc34a1548689404e61a2a4aac896"
+  dependencies:
+    moment "*"
 
 "@types/node@*", "@types/node@^6.0.46", "@types/node@^6.0.52":
   version "6.0.62"
@@ -3028,9 +3038,9 @@ jodid25519@^1.0.0:
   dependencies:
     jsbn "~0.1.0"
 
-joi@10.x.x:
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-10.2.0.tgz#2c9dba08240d453e58145667f0d5006de527e328"
+joi@10.x.x, joi@^10.2.1:
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/joi/-/joi-10.2.1.tgz#f3a5f6a492d311735f17b109487646c2194aa92d"
   dependencies:
     hoek "4.x.x"
     isemail "2.x.x"
@@ -3738,7 +3748,11 @@ moment-timezone@^0.5.4:
   dependencies:
     moment ">= 2.6.0"
 
-moment@2.15.x, moment@2.x.x, "moment@>= 2.6.0", moment@^2.13.0:
+moment@*, moment@2.x.x, "moment@>= 2.6.0", moment@^2.13.0, moment@^2.17.1:
+  version "2.17.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
+
+moment@2.15.x:
   version "2.15.2"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.15.2.tgz#1bfdedf6a6e345f322fe956d5df5bd08a8ce84dc"
 

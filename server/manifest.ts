@@ -24,13 +24,6 @@ manifest = {
             plugin: 'inert'
         },
 
-        // Authentication
-        // {
-        //     plugin: {
-        //         register: './app-start/auth'
-        //     }
-        // },
-
         // App Routes
         {
             plugin: {
