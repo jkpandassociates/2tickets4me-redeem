@@ -1,6 +1,5 @@
 import { IRouteConfiguration, Request, IReply } from 'hapi';
 import { controller, Controller, get, post, validate } from 'hapi-decorators';
-import * as Joi from 'joi';
 
 import { getDBContext, DbContext } from '../models';
 
@@ -17,14 +16,6 @@ class OrdersController implements Controller {
     routes: () => IRouteConfiguration[];
 
     @get('/')
-    @validate({
-        query: Joi.object({
-            firstName: Joi.string(),
-            lastName: Joi.string(),
-            codeName: Joi.string(),
-            sponsor: Joi.string()
-        }).optionalKeys(['firstName', 'lastName', 'codeName', 'sponsor']).options({ stripUnknown: true })
-    })
     getOrders(request: Request, reply: IReply) {
         const {firstName, lastName, codeName, sponsor} = request.query;
 
@@ -63,8 +54,22 @@ class OrdersController implements Controller {
         this._db.Order.create(orderValues)
             .then(order => {
                 reply({ data: order });
-            }).catch(e => {
-                reply(e);
+            }).catch((error: Error) => {
+                const errors: ApiErrors = [];
+                let detail = 'Something went wrong';
+                let statusCode = 500;
+                switch(error.message) {
+                    case 'DUPLICATE':
+                        detail = 'You are attempting to register multiple times.<br /><br />Please contact <a href="mailto:techsupport@2tickets4me.com">techsupport@2tickets4me.com</a> if you have a concern regarding your registration.';
+                        statusCode = 422;
+                        break;
+                }
+                errors.push({
+                    source: '/api/orders',
+                    title: error.message,
+                    detail: detail
+                });
+                reply({ errors }).code(statusCode);
             });
     }
 }

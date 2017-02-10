@@ -155,8 +155,48 @@ function beforeValidate(this: Sequelize.Model<OrderInstance, OrderAttributes>, o
     if (order.isNewRecord) {
         order.set('Date', new Date());
         order.set('SerialNumber', generateSerialNumber());
+
+        // validate this is not a duplicate entry
+        this.findAndCount({
+            where: {
+                $and: [
+                    {
+                        FirstName: {
+                            $like: `${order.get('FirstName')}`
+                        }
+                    },
+                    {
+                    $or: [
+                        {
+                        LastName: {
+                            $like: `${order.get('LastName')}`
+                        }},
+                        {
+                        Phone: {
+                            $eq: `${order.get('Phone')}`
+                        }},
+                        {
+                        Email: {
+                            $like: `${order.get('Email')}`
+                        }}
+                    ]
+                    }
+                ]
+            }
+        }).then(data => {
+            const { count } = data;
+            if (!count) {
+                done();
+            } else {
+                done('DUPLICATE');
+            }
+        }).catch(error => {
+            done(error);
+        });
+    } else {
+        done();
     }
-    done();
+
 }
 
 function generateSerialNumber(): string {
