@@ -1,7 +1,7 @@
 <h3 md-dialog-title>{{title}}</h3>
 <md-dialog-content>
-    {{message}}
+    <div [innerHtml]="message"></div>
 </md-dialog-content>
 <md-dialog-actions>
-    <button mg-raised-button md-dialog-close>OK</button>
+    <button md-raised-button md-dialog-close>OK</button>
 </md-dialog-actions>

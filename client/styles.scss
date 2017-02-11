@@ -1,4 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Roboto,Helvetica Neue Light,Helvetica Neue,Helvetica,Arial,Lucida Grande,sans-serif;
+    margin: 0;
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  @media (min-width: 48em) {
+    width: 46em;
+  }
+  @media (min-width: 62em) {
+    width: 60em;
+  }
+  @media (min-width: 75em) {
+    width: 73em;
+  }
+}
+
+.container-fluid {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
 .half-width {
     width: 50%;
 }

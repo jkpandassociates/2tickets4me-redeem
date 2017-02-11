@@ -7,30 +7,3 @@ $tix-warn:    md-palette($md-deep-orange);
 $tix-theme: md-light-theme($tix-primary, $tix-accent, $tix-warn);
 
 @include angular-material-theme($tix-theme);
-
-body {
-    margin: 0;
-}
-
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-  @media (min-width: 48em) {
-    width: 46em;
-  }
-  @media (min-width: 62em) {
-    width: 60em;
-  }
-  @media (min-width: 75em) {
-    width: 73em;
-  }
-}
-
-.container-fluid {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}

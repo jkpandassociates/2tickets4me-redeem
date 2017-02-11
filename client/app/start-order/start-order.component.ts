@@ -38,8 +38,13 @@ export class StartOrderComponent {
                 let error = `Invalid Access Code: ${this.accessCode}`;
                 console.warn(error);
                 let dialogRef = this._dialog.open(ErrorDialogComponent, { role: 'alertdialog' });
-                dialogRef.componentInstance.title = 'Error';
-                dialogRef.componentInstance.message = error;
+                dialogRef.componentInstance.title = `${error}`;
+                dialogRef.componentInstance.message = `
+                The access code entered is either expired or invalid.
+                If you have questions about this access code, please
+                email us at <a href="mailto:techsupport@2tickets4me.com">techsupport@2tickets4me.com</a>.<br /><br />
+                Please include company name and authorization rep and
+                what date you were given this code in your e-mail.`;
                 this.accessCode = null;
                 this.form.reset();
             }
