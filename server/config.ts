@@ -6,6 +6,8 @@ const criteria = {
     log_level: process.env.LOG_LEVEL || 'verbose'
 };
 
+const origins: string[] = process.env.CORS_ORIGIN ? [process.env.CORS_ORIGIN] : ['http://localhost:3000', 'http://localhost:4200'];
+
 const config = {
     $meta: 'server config',
     server: {
@@ -16,7 +18,7 @@ const config = {
                 relativeTo: join(__dirname, '..', 'wwwroot')
             },
             cors: {
-                origin: [process.env.CORS_ORIGIN || 'http://localhost:3000']
+                origin: [...origins]
             }
         },
         router: {
