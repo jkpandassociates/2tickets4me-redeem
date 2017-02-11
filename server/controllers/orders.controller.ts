@@ -46,7 +46,7 @@ class OrdersController implements Controller {
         payload: getDBContext().validations.Order.options({ stripUnknown: true }),
 
     })
-    newOrder(request: Request, reply: IReply) {
+    create(request: Request, reply: IReply) {
         const orderValues = request.payload;
 
         orderValues.IPAddress = request.headers['x-forwarded-for'] || request.info.remoteAddress;
