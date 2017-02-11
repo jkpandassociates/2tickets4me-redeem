@@ -10,12 +10,17 @@ import { HeaderComponent } from './layout/header/header.component';
 import { StartOrderComponent } from './start-order/start-order.component';
 import { ProgressService } from './shared/progress.service';
 import { AccessCodeService } from './shared/access-code.service';
+import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    StartOrderComponent
+    StartOrderComponent,
+    ErrorDialogComponent
+  ],
+  entryComponents: [
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,

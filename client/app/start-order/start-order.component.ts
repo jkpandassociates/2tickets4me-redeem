@@ -1,9 +1,11 @@
+import { MdDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { ProgressService } from '../shared/progress.service';
 import { AccessCodeService } from '../shared/access-code.service';
+import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'tix-start-order',
@@ -12,7 +14,11 @@ import { AccessCodeService } from '../shared/access-code.service';
 })
 export class StartOrderComponent {
 
-    constructor(private _progress: ProgressService, private _accessCode: AccessCodeService, private _router: Router) {}
+    constructor(
+        private _progress: ProgressService,
+        private _accessCode: AccessCodeService,
+        private _router: Router,
+        private _dialog: MdDialog) {}
 
     @ViewChild('startOrderForm') form: NgForm;
 
@@ -29,7 +35,13 @@ export class StartOrderComponent {
                 // this._router.navigate(['/order']);
                 console.log(`Valid Access Code: ${this.accessCode}`)
             } else {
-                console.warn(`Invalid Access Code: ${this.accessCode}`);
+                let error = `Invalid Access Code: ${this.accessCode}`;
+                console.warn(error);
+                let dialogRef = this._dialog.open(ErrorDialogComponent, { role: 'alertdialog' });
+                dialogRef.componentInstance.title = 'Error';
+                dialogRef.componentInstance.message = error;
+                this.accessCode = null;
+                this.form.reset();
             }
             // report error if valid = false
             this._progress.setProgressActive(false);
