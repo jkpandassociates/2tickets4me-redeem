@@ -51,6 +51,9 @@ export class AccessCodeService {
                 let expireDate = new Date(c.ExpireDate);
                 active = today < expireDate;
             }
+            if (active && c.MaxQuantity) {
+                active = c.UsedQuantity < c.MaxQuantity;
+            }
             return active;
         });
     }
