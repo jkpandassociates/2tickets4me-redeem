@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { StartOrderComponent } from './start-order/start-order.component';
 import { ProgressService } from './shared/progress.service';
+import { AccessCodeService } from './shared/access-code.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProgressService } from './shared/progress.service';
     AppRoutingModule
   ],
   providers: [
-      ProgressService
+      ProgressService,
+      AccessCodeService
   ],
   bootstrap: [AppComponent]
 })
