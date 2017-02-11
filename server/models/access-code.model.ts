@@ -41,9 +41,14 @@ export function defineModel(sequelize: Sequelize.Sequelize, dataTypes: Sequelize
             allowNull: false,
             field: 'code_start',
             get: function getDate(this: AccessCodeInstance) {
-                const date = new Date(0);
-                date.setUTCSeconds(this.getDataValue('StartDate'));
-                return date;
+                let startTime = this.getDataValue('StartDate');
+                if (startTime) {
+                    const date = new Date(0);
+                    date.setUTCSeconds(startTime);
+                    return date;
+                } else {
+                    return null;
+                }
             },
             set: function setDate(this: AccessCodeInstance, val: Date) {
                 const timestamp = Moment(val).unix();
@@ -55,9 +60,14 @@ export function defineModel(sequelize: Sequelize.Sequelize, dataTypes: Sequelize
             allowNull: false,
             field: 'code_expire',
             get: function getDate(this: AccessCodeInstance) {
-                const date = new Date(0);
-                date.setUTCSeconds(this.getDataValue('ExpireDate'));
-                return date;
+                const expireTime = this.getDataValue('ExpireDate');
+                if (expireTime) {
+                    const date = new Date(0);
+                    date.setUTCSeconds(expireTime);
+                    return date;
+                } else {
+                    return null;
+                }
             },
             set: function setDate(this: AccessCodeInstance, val: Date) {
                 const timestamp = Moment(val).unix();
