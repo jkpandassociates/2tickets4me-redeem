@@ -7,10 +7,7 @@
     {
       "root": "client",
       "outDir": "wwwroot",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
+      "assets": [],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -18,6 +15,7 @@
       "tsconfig": "tsconfig.json",
       "prefix": "tix",
       "styles": [
+        "tix-theme.scss",
         "styles.scss"
       ],
       "scripts": [],

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import {StartOrderComponent} from './start-order/start-order.component';
+
 const routes: Routes = [
   {
     path: '',
-    children: []
+    component: StartOrderComponent
   }
 ];
 
