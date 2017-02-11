@@ -1,3 +1,19 @@
-<p>
-  start-order works!
-</p>
+<md-card class="start-card">
+    <md-card-title>Congratulations!</md-card-title>
+    <md-card-content>
+        <form (ngSubmit)="onSubmit()" #startOrderForm="ngForm" novalidate>
+            <p>To redeem your tickets, please enter a current and valid access code.</p>
+            <p>
+                <md-input-container class="full-width">
+                    <input md-input placeholder="Access Code" [(ngModel)]="accessCode" #ctrl="ngModel" name="accessCode" required />
+                </md-input-container>
+            </p>
+            <div *ngIf="ctrl.touched && ctrl.invalid" class="alert alert-danger">
+                Please Enter Access Code
+            </div>
+            <p>
+                <button md-raised-button>CONTINUE</button>
+            </p>
+        </form>
+    </md-card-content>
+</md-card>

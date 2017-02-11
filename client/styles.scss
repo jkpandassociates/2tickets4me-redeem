@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+.half-width {
+    width: 50%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.alert {
+    padding: 10px 15px;
+    color: #444;
+    background-color: #cfcfcf;
+    &.alert-danger {
+        color: #fff;
+        background-color: #ac2222;
+    }
+}

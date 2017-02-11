@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { StartOrderComponent } from './start-order/start-order.component';
+import { ProgressService } from './shared/progress.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { StartOrderComponent } from './start-order/start-order.component';
     MaterialModule.forRoot(),
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+      ProgressService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
