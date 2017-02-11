@@ -1,14 +1,14 @@
-import { TmpCliAppPage } from './app.po';
+import { TwotixredeemPage } from './app.po';
 
-describe('tmp-cli-app App', function() {
-  let page: TmpCliAppPage;
+describe('twotixredeem App', function() {
+  let page: TwotixredeemPage;
 
   beforeEach(() => {
-    page = new TmpCliAppPage();
+    page = new TwotixredeemPage();
   });
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('tix works!');
   });
 });
