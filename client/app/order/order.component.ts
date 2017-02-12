@@ -1,7 +1,11 @@
+import { Router } from '@angular/router';
+import { Response } from '@angular/http';
+import { MdDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { OrderService } from '../shared/order.service';
+import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
 
 @Component({
     selector: 'tix-order',
@@ -10,7 +14,11 @@ import { OrderService } from '../shared/order.service';
 })
 export class OrderComponent implements OnInit {
 
-    constructor(private _fb: FormBuilder, private _order: OrderService) { }
+    constructor(
+        private _fb: FormBuilder,
+        private _order: OrderService,
+        private _dialog: MdDialog,
+        private _route: Router) { }
 
     orderForm: FormGroup;
 
@@ -59,7 +67,8 @@ export class OrderComponent implements OnInit {
         },
         WorkPhone: {},
         Email: {
-            required: 'Email Address is required.'
+            required: 'Email Address is required.',
+            invalid: 'Email Address must be valid.'
         },
         Destination: {
             required: 'Destination is required.'
@@ -145,11 +154,36 @@ export class OrderComponent implements OnInit {
         order.CodeName = localStorage.getItem('access_code');
 
         this._order.createOrder(order).subscribe((newOrder) => {
-            // New Order
-            debugger;
+            localStorage.removeItem('access_code');
+            this._route.navigate([`/order/${newOrder.SerialNumber}`]);
         }, (error) => {
             // Error
-            debugger;
+            if (error instanceof Response) {
+                let response = error.json();
+                if (response.validation && response.validation.keys) {
+                    const keys: string[] = response.validation.keys;
+                    for (const field in this.orderFormErrors) {
+                        // clear previous error message (if any)
+                        this.orderFormErrors[field] = '';
+                        const messages = this.validationMessages[field];
+                        if (keys.indexOf(field) > -1 && messages.invalid) {
+                            this.orderFormErrors[field] += messages.invalid + ' ';
+                        }
+                    }
+                } else if (response.errors) {
+                    let err = response.errors.shift();
+                    let dialogRef = this._dialog.open(ErrorDialogComponent, { role: 'alertdialog' });
+                    if (err.title) {
+                        dialogRef.componentInstance.title = `${err.title}`;
+                    }
+                    if (err.detail) {
+                        dialogRef.componentInstance.message = `${err.detail}`;
+                    }
+                }
+            } else {
+                console.error(error);
+                this._dialog.open(ErrorDialogComponent, { role: 'alertdialog' });
+            }
         });
 
     }

@@ -8,7 +8,9 @@ import { AccessCodeService } from './access-code.service';
 @Injectable()
 export class AccessGuard implements CanActivate {
 
-    constructor(private _accessCode: AccessCodeService, private _router: Router) {}
+    constructor(
+        private _accessCode: AccessCodeService,
+        private _router: Router) {}
 
     canActivate() {
         return this.checkForValidAccessCode();
