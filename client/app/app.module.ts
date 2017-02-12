@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,30 +13,33 @@ import { ProgressService } from './shared/progress.service';
 import { AccessCodeService } from './shared/access-code.service';
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { AccessGuard } from './shared/access-guard.service';
+import { OrderService } from './shared/order.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    StartOrderComponent,
-    OrderComponent,
-    ErrorDialogComponent
-  ],
-  entryComponents: [
-    ErrorDialogComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    MaterialModule.forRoot(),
-    AppRoutingModule
-  ],
-  providers: [
-      ProgressService,
-      AccessCodeService,
-      AccessGuard
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        StartOrderComponent,
+        OrderComponent,
+        ErrorDialogComponent
+    ],
+    entryComponents: [
+        ErrorDialogComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule,
+        MaterialModule.forRoot(),
+        AppRoutingModule
+    ],
+    providers: [
+        ProgressService,
+        AccessCodeService,
+        AccessGuard,
+        OrderService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,155 @@
-<p>
-  order works!
-</p>
+<div class="row">
+    <div class="half-width">
+        <md-card>
+            <md-card-title>E-Ticket Registration Form</md-card-title>
+            <md-card-content>
+                <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" novalidate>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="First Name" formControlName="FirstName" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.FirstName" class="alert alert-danger">
+                            {{orderFormErrors.FirstName}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="Last Name" formControlName="LastName" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.LastName" class="alert alert-danger">
+                            {{orderFormErrors.LastName}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="Mailing Address" formControlName="Address" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.Address" class="alert alert-danger">
+                            {{orderFormErrors.Address}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="City" formControlName="City" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.City" class="alert alert-danger">
+                            {{orderFormErrors.City}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="State" formControlName="State" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.State" class="alert alert-danger">
+                            {{orderFormErrors.State}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="Zip Code" formControlName="ZipCode" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.ZipCode" class="alert alert-danger">
+                            {{orderFormErrors.ZipCode}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="Cell/Home Phone" formControlName="Phone" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.Phone" class="alert alert-danger">
+                            {{orderFormErrors.Phone}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="Work Phone" formControlName="WorkPhone">
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.WorkPhone" class="alert alert-danger">
+                            {{orderFormErrors.WorkPhone}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="Email Address" formControlName="Email" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.Email" class="alert alert-danger">
+                            {{orderFormErrors.Email}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="Destination" formControlName="Destination" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.Destination" class="alert alert-danger">
+                            {{orderFormErrors.Destination}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="Sponsor" formControlName="Sponsor" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.Sponsor" class="alert alert-danger">
+                            {{orderFormErrors.Sponsor}}
+                        </div>
+                    </div>
+                    <div>
+                        <md-input-container class="full-width">
+                            <input md-input placeholder="Authorization Rep" formControlName="RepresentativeName" required>
+                        </md-input-container>
+                        <div *ngIf="orderFormErrors.RepresentativeName" class="alert alert-danger">
+                            {{orderFormErrors.RepresentativeName}}
+                        </div>
+                    </div>
+                    <div class="full-width cell">
+                        <label>Date Issued</label> {{todaysDate | date}}
+                    </div>
+                    <div class="full-width cell">
+                        <label>I agree to the terms & conditions</label>
+                        <md-checkbox formControlName="AgreeToTerms" required></md-checkbox>
+                        <div *ngIf="orderFormErrors.AgreeToTerms" class="alert alert-danger">
+                            {{orderFormErrors.AgreeToTerms}}
+                        </div>
+                    </div>
+                    <div class="full-width actions">
+                        <button md-raised-button>Submit</button>
+                        <button md-raised-button type="button" (click)="orderForm.reset()">Clear</button>
+                    </div>
+                </form>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <div class="half-width">
+        <md-card>
+            <md-card-title>Registration Instructions</md-card-title>
+            <md-card-content>
+                <ol>
+                    <li>Fill out this form completely.</li>
+                    <li>After you submit this form you will receive an email with an <strong>E-Ticket Registration Card</strong>.</li>
+                    <li>Print out the registration card and mail it in to us <strong>within 30 days</strong> of Issue Date.<br />
+                    <span class="info">(mailing instructions will be included in your e-mail)</span></li>
+                    <li>After we receive your registration card, we will then mail you a <strong>VACATION REQUEST FORM</strong>
+                    via USPS First Class Mail to fill out.</li>
+                    <li>Your <strong>VACATION REQUEST FORM</strong> will have the phone number, fax number &amp; mailing address of our Travel Agency.
+                    Please contact them to discuss and finalize your trip details. </li>
+                </ol>
+                <ul>
+                    <li><strong>Sponsor</strong> is the business from whom you received your promotion from.</li>
+                    <li><strong>Authorization Rep</strong> is the person from whom you received your promotion from.</li>
+                    <li><strong>Sponsor</strong> &amp; <strong>Authorization Rep</strong> must be accurate or your request will be voided.</li>
+                </ul>
+
+                <p>
+                    You must have a valid e-mail address to participate in this promotion. We are not
+                    reponsible for invalid e-mail addresses or spam filters. To ensure you receive this
+                    promotion, please add donotreply@2tickets4me.com to your address book.
+                    We will not use, sell, or provide your e-mail address or contact information to anyone
+                    other than the Sponsor and/or Authorization Rep that gave you this promotion.
+                    If you have any problems submitting this form, DO NOT contact the Sponsor or
+                    Authorization Rep. Simply contact
+                    <a href="mailto:techsupport@2tickets4me.com">techsupport@2tickets4me.com</a>
+                </p>
+            </md-card-content>
+        </md-card>
+    </div>
+</div>

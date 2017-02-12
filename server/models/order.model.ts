@@ -76,6 +76,7 @@ export function defineModel(sequelize: Sequelize.Sequelize, dataTypes: Sequelize
         },
         Phone: {
             type: dataTypes.STRING,
+            allowNull: false,
             field: 'reg_phone'
         },
         WorkPhone: {
@@ -86,12 +87,14 @@ export function defineModel(sequelize: Sequelize.Sequelize, dataTypes: Sequelize
         IPAddress: {
             type: dataTypes.STRING,
             field: 'ip_address',
+            allowNull: false,
             validate: {
                 isIP: true
             }
         },
         Destination: {
             type: dataTypes.STRING,
+            allowNull: false,
             field: 'reg_destination'
         },
         CodeName: {
@@ -144,7 +147,7 @@ export const validations = Joi.object({
     ZipCode: Joi.number().required(),
     Email: Joi.string().email().required(),
     Phone: Joi.string().required(),
-    WorkPhone: Joi.string().optional().allow(null),
+    WorkPhone: Joi.string().optional().allow(['', null]),
     Destination: Joi.string().required(),
     CodeName: Joi.string().required(),
     Sponsor: Joi.string().required(),
