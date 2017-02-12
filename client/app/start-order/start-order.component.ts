@@ -32,7 +32,7 @@ export class StartOrderComponent {
         this._accessCode.isAccessCodeValid(this.accessCode).subscribe(valid => {
             if (valid) {
                 localStorage.setItem('access_code', this.accessCode);
-                // this._router.navigate(['/order']);
+                this._router.navigate(['/order']);
                 console.log(`Valid Access Code: ${this.accessCode}`)
             } else {
                 let error = `Invalid Access Code: ${this.accessCode}`;
