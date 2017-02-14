@@ -29,11 +29,16 @@ export class StartOrderComponent {
             return; // prevent invalid data being sent to the server
         }
         this._progress.setProgressActive(true);
-        this._accessCode.isAccessCodeValid(this.accessCode).subscribe(valid => {
+        this._accessCode.isAccessCodeValid(this.accessCode).subscribe(result => {
+            let [valid, c] = result;
             if (valid) {
                 localStorage.setItem('access_code', this.accessCode);
-                this._router.navigate(['/order']);
-                console.log(`Valid Access Code: ${this.accessCode}`)
+                console.log(`Valid Access Code: ${this.accessCode}`);
+                if (!c.SurveyUrl) {
+                    this._router.navigate(['/order']);
+                } else {
+                    location.href = c.SurveyUrl;
+                }
             } else {
                 let error = `Invalid Access Code: ${this.accessCode}`;
                 console.warn(error);

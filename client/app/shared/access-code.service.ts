@@ -28,18 +28,14 @@ export class AccessCodeService {
         return this._http.get('/api/accesscodes', { search: searchParams })
             .map(response => {
                 const accessCodes: AccessCode[] = response.json().data;
-                if (accessCodes.length) {
-                    return accessCodes.shift();
-                } else {
-                    return null;
-                }
+                return (accessCodes.length) ? accessCodes.shift() : null;
             });
     }
 
-    isAccessCodeValid(code: string): Observable<boolean> {
+    isAccessCodeValid(code: string): Observable<[boolean, AccessCode]> {
         return this.getAccessCode(code).map(c => {
             if (!c) {
-                return false;
+                return [false, null];
             }
             const today = new Date();
             let active = c.Active;
@@ -54,7 +50,7 @@ export class AccessCodeService {
             if (active && c.MaxQuantity) {
                 active = c.UsedQuantity < c.MaxQuantity;
             }
-            return active;
+            return [active, c];
         });
     }
 }
