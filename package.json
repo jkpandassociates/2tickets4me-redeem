@@ -13,6 +13,8 @@
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor",
     "build": "tsc -p server && ng build --prod",
+    "build:server": "tsc -p server",
+    "build:client": "ng build --prod",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "private": true,

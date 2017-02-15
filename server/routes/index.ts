@@ -24,6 +24,14 @@ export function register(server: Server, _, next) {
 
     server.route({
         method: 'GET',
+        path: '/',
+        handler: {
+            file: 'index.html'
+        }
+    });
+
+    server.route({
+        method: 'GET',
         path: '/{param*}',
         handler: function(request, reply) {
             let pathParts = request.path.split('/');
