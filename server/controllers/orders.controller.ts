@@ -1,5 +1,7 @@
 import { IRouteConfiguration, Request, IReply } from 'hapi';
 import { controller, Controller, get, post, validate } from 'hapi-decorators';
+import * as Req from 'request';
+import * as moment from 'moment';
 
 import { getDBContext, DbContext } from '../models';
 
@@ -39,6 +41,35 @@ class OrdersController implements Controller {
         }).then(orders => {
             reply({ data: orders });
         });
+    }
+
+    @get('/{serial}/regcard.png')
+    orderImage(request: Request, reply: IReply) {
+        const serialNumber = request.params['serial'];
+        this._db.Order.findOne({ where: { SerialNumber: serialNumber } })
+            .then(o => {
+                if (!o) {
+                    reply(new Error('Invalid Serial Number'));
+                    return;
+                }
+                const order = o.toJSON();
+                const issueDate = moment(order.Date).format('L');
+                let imageUrl = 'http://2tickets4me.com/2tickets4me/images/regcard.php';
+                imageUrl += `?name=${order.FirstName} ${order.LastName}`;
+                imageUrl += `&email=${order.Email}`;
+                imageUrl += `&add1=${order.Address}`;
+                imageUrl += `&add2=${order.City}, ${order.State} ${order.ZipCode}`;
+                imageUrl += `&work=${order.WorkPhone}`;
+                imageUrl += `&home=${order.Phone}`;
+                imageUrl += `&sponsor=${order.Sponsor}`;
+                imageUrl += `&auth=${order.RepresentativeName}`;
+                imageUrl += `&c=${order.CodeName}`;
+                imageUrl += `&serial=${order.SerialNumber}`;
+                imageUrl += `&date=${issueDate}`;
+                Req(imageUrl).on('response', (response) => {
+                    reply(response).header('Content-Type', 'image/png');
+                });
+            });
     }
 
     @post('/')
