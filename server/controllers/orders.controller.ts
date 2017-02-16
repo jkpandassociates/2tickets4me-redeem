@@ -43,6 +43,19 @@ class OrdersController implements Controller {
         });
     }
 
+    @get('/{serial}')
+    getOrder(request: Request, reply: IReply) {
+        const serialNumber = request.params['serial'];
+        this._db.Order.findOne({ where: { SerialNumber: serialNumber } })
+            .then(order => {
+                if (!order) {
+                    reply(new Error('Invalid Serial Number'));
+                    return;
+                }
+                reply({ data: order });
+            });
+    }
+
     @get('/{serial}/regcard.png')
     orderImage(request: Request, reply: IReply) {
         const serialNumber = request.params['serial'];
