@@ -8,10 +8,7 @@ export class Mailer {
 
     send(transmission: Transmission) {
         let s = (<(transmission: Transmission) => Promise<any>>this._client.transmissions.send);
-        s(transmission)
-            .then(_ => {
-                debugger;
-            })
+        return s(transmission)
             .catch(error => {
                 console.error(error);
             });

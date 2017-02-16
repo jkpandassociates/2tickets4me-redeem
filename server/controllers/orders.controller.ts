@@ -108,7 +108,13 @@ class OrdersController implements Controller {
                     },
                     substitution_data: orderData
                 }], '2tix-airline-order-confirmation')
-                reply({ data: order });
+                    .then((data) => {
+                        console.log(data);
+                        reply({ data: order });
+                    })
+                    .catch(error => {
+                        reply(error);
+                    });
             }).catch((error: Error) => {
                 const errors: ApiErrors = [];
                 let detail = 'Something went wrong';
@@ -154,7 +160,7 @@ class OrdersController implements Controller {
             }
         };
 
-        this._mailer.send(transmission);
+        return this._mailer.send(transmission);
     }
 }
 
