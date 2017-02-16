@@ -8,7 +8,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="First Name" formControlName="FirstName" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.FirstName" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.FirstName" class="alert alert-warn">
                             {{orderFormErrors.FirstName}}
                         </div>
                     </div>
@@ -16,7 +16,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="Last Name" formControlName="LastName" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.LastName" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.LastName" class="alert alert-warn">
                             {{orderFormErrors.LastName}}
                         </div>
                     </div>
@@ -24,7 +24,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="Mailing Address" formControlName="Address" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.Address" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.Address" class="alert alert-warn">
                             {{orderFormErrors.Address}}
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="City" formControlName="City" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.City" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.City" class="alert alert-warn">
                             {{orderFormErrors.City}}
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="State" formControlName="State" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.State" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.State" class="alert alert-warn">
                             {{orderFormErrors.State}}
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="Zip Code" formControlName="ZipCode" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.ZipCode" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.ZipCode" class="alert alert-warn">
                             {{orderFormErrors.ZipCode}}
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="Cell/Home Phone" formControlName="Phone" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.Phone" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.Phone" class="alert alert-warn">
                             {{orderFormErrors.Phone}}
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="Work Phone" formControlName="WorkPhone">
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.WorkPhone" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.WorkPhone" class="alert alert-warn">
                             {{orderFormErrors.WorkPhone}}
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="Email Address" formControlName="Email" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.Email" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.Email" class="alert alert-warn">
                             {{orderFormErrors.Email}}
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="Destination" formControlName="Destination" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.Destination" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.Destination" class="alert alert-warn">
                             {{orderFormErrors.Destination}}
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="Sponsor" formControlName="Sponsor" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.Sponsor" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.Sponsor" class="alert alert-warn">
                             {{orderFormErrors.Sponsor}}
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                         <md-input-container class="full-width">
                             <input md-input placeholder="Authorization Rep" formControlName="RepresentativeName" required>
                         </md-input-container>
-                        <div *ngIf="orderFormErrors.RepresentativeName" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.RepresentativeName" class="alert alert-warn">
                             {{orderFormErrors.RepresentativeName}}
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                     <div class="full-width cell">
                         <label>I agree to the terms & conditions</label>
                         <md-checkbox formControlName="AgreeToTerms" required></md-checkbox>
-                        <div *ngIf="orderFormErrors.AgreeToTerms" class="alert alert-danger">
+                        <div *ngIf="orderFormErrors.AgreeToTerms" class="alert alert-warn">
                             {{orderFormErrors.AgreeToTerms}}
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                 <p>
                     You must have a valid e-mail address to participate in this promotion. We are not
                     reponsible for invalid e-mail addresses or spam filters. To ensure you receive this
-                    promotion, please add donotreply@2tickets4me.com to your address book.
+                    promotion, please add <strong>postmaster@2tickets4me.com</strong> to your address book.
                     We will not use, sell, or provide your e-mail address or contact information to anyone
                     other than the Sponsor and/or Authorization Rep that gave you this promotion.
                     If you have any problems submitting this form, DO NOT contact the Sponsor or

@@ -1,16 +1,21 @@
-import { OnDestroy, Component,  OnInit } from '@angular/core';
+import { OnDestroy, Component,  OnInit, AfterViewChecked } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ProgressService } from '../../shared/progress.service';
+import { TitleService } from '../../shared/title.service';
 
 @Component({
     selector: 'tix-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy, AfterViewChecked {
 
-    constructor(private _progress: ProgressService) { }
+    constructor(
+        private _progress: ProgressService,
+        private _title: TitleService) { }
+
+    title: string;
 
     showProgressBar: boolean;
     showProgressBarSubscription: Subscription;
@@ -21,6 +26,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.showProgressBarSubscription.unsubscribe();
+    }
+
+    ngAfterViewChecked() {
+        setTimeout(() => {
+            this.title = this._title.getTitle();
+        }, 0);
     }
 
 }

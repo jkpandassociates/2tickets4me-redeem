@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { OrderService } from '../shared/order.service';
 import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
+import { TitleService } from '../shared/title.service';
+import { ProgressService } from '../shared/progress.service';
 
 @Component({
     selector: 'tix-order',
@@ -18,7 +20,9 @@ export class OrderComponent implements OnInit {
         private _fb: FormBuilder,
         private _order: OrderService,
         private _dialog: MdDialog,
-        private _route: Router) { }
+        private _route: Router,
+        private _title: TitleService,
+        private _progress: ProgressService) { }
 
     orderForm: FormGroup;
 
@@ -150,14 +154,18 @@ export class OrderComponent implements OnInit {
             return;
         }
 
+        this._progress.setProgressActive(true);
+
         let order: Order = this.orderForm.value;
         order.CodeName = localStorage.getItem('access_code');
 
         this._order.createOrder(order).subscribe((newOrder) => {
             localStorage.removeItem('access_code');
+            this._progress.setProgressActive(false);
             this._route.navigate([`/order/${newOrder.SerialNumber}`]);
         }, (error) => {
             // Error
+            this._progress.setProgressActive(false);
             if (error instanceof Response) {
                 let response = error.json();
                 if (response.validation && response.validation.keys) {
@@ -189,6 +197,7 @@ export class OrderComponent implements OnInit {
     }
 
     ngOnInit() {
+        this._title.setTitle('Register');
         this.buildForm();
     }
 
