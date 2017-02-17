@@ -3,9 +3,6 @@ import { enableProdMode } from '@angular/core';
 import { environment } from './environments/environment';
 import { AppModule } from './app/app.module';
 
-// models
-import './app/models';
-
 if (environment.production) {
   enableProdMode();
 }

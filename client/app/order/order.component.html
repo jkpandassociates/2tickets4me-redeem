@@ -37,9 +37,13 @@
                         </div>
                     </div>
                     <div>
-                        <md-input-container class="full-width">
-                            <input md-input placeholder="State" formControlName="State" required>
-                        </md-input-container>
+                        <div class="md-select-container">
+                            <md-select class="full-width" placeholder="State" formControlName="State" required>
+                                <md-option *ngFor="let state of states" [value]="state.abbreviation">
+                                    {{state.name}}
+                                </md-option>
+                            </md-select>
+                        </div>
                         <div *ngIf="orderFormErrors.State" class="alert alert-warn">
                             {{orderFormErrors.State}}
                         </div>
