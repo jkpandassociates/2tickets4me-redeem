@@ -28,6 +28,8 @@ export class OrderComponent implements OnInit {
 
     todaysDate = new Date();
 
+    states: { name: string; abbreviation: string }[] = [];
+
     orderFormErrors = {
         FirstName: '',
         LastName: '',
@@ -198,6 +200,7 @@ export class OrderComponent implements OnInit {
 
     ngOnInit() {
         this._title.setTitle('Register');
+        this.states = this._order.states;
         this.buildForm();
     }
 
