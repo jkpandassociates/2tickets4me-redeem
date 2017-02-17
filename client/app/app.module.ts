@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -15,6 +15,7 @@ import { AccessCodeService } from './shared/access-code.service';
 import { ErrorDialogComponent } from './shared/error-dialog/error-dialog.component';
 import { AccessGuard } from './shared/access-guard.service';
 import { OrderService } from './shared/order.service';
+import { TitleService } from './shared/title.service';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,9 @@ import { OrderService } from './shared/order.service';
         ProgressService,
         AccessCodeService,
         AccessGuard,
-        OrderService
+        OrderService,
+        Title,
+        TitleService
     ],
     bootstrap: [AppComponent]
 })

@@ -1,24 +1,26 @@
 import { MdDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { ProgressService } from '../shared/progress.service';
 import { AccessCodeService } from '../shared/access-code.service';
 import { ErrorDialogComponent } from '../shared/error-dialog/error-dialog.component';
+import { TitleService } from '../shared/title.service';
 
 @Component({
   selector: 'tix-start-order',
   templateUrl: './start-order.component.html',
   styleUrls: ['./start-order.component.scss']
 })
-export class StartOrderComponent {
+export class StartOrderComponent implements OnInit {
 
     constructor(
         private _progress: ProgressService,
         private _accessCode: AccessCodeService,
         private _router: Router,
-        private _dialog: MdDialog) {}
+        private _dialog: MdDialog,
+        private _title: TitleService) {}
 
     @ViewChild('startOrderForm') form: NgForm;
 
@@ -56,6 +58,10 @@ export class StartOrderComponent {
             // report error if valid = false
             this._progress.setProgressActive(false);
         });
+    }
+
+    ngOnInit() {
+        this._title.setTitle('Start Order');
     }
 
 }

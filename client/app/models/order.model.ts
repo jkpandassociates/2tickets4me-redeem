@@ -12,4 +12,6 @@ interface Order {
     CodeName: string;
     Sponsor: string;
     RepresentativeName: string;
+    SerialNumber?: string;
+    Date?: string | Date;
 }

@@ -4,14 +4,17 @@ import * as Req from 'request';
 import * as moment from 'moment';
 
 import { getDBContext, DbContext } from '../models';
+import { Mailer } from '../infrastructure/mailer';
 
 @controller('/api/orders')
 class OrdersController implements Controller {
 
     private _db: DbContext;
+    private _mailer: Mailer;
 
     constructor(getDBContext) {
         this._db = getDBContext();
+        this._mailer = new Mailer();
     }
 
     baseUrl: string;
@@ -41,6 +44,19 @@ class OrdersController implements Controller {
         }).then(orders => {
             reply({ data: orders });
         });
+    }
+
+    @get('/{serial}')
+    getOrder(request: Request, reply: IReply) {
+        const serialNumber = request.params['serial'];
+        this._db.Order.findOne({ where: { SerialNumber: serialNumber } })
+            .then(order => {
+                if (!order) {
+                    reply(new Error('Invalid Serial Number'));
+                    return;
+                }
+                reply({ data: order });
+            });
     }
 
     @get('/{serial}/regcard.png')
@@ -84,7 +100,21 @@ class OrdersController implements Controller {
 
         this._db.Order.create(orderValues)
             .then(order => {
-                reply({ data: order });
+                let orderData = order.toJSON();
+                this._notify([{
+                    address: {
+                        name: `${orderData.FirstName} ${orderData.LastName}`,
+                        email: orderData.Email
+                    },
+                    substitution_data: orderData
+                }], '2tix-airline-order-confirmation')
+                    .then((data) => {
+                        console.log(data);
+                        reply({ data: order });
+                    })
+                    .catch(error => {
+                        reply(error);
+                    });
             }).catch((error: Error) => {
                 const errors: ApiErrors = [];
                 let detail = 'Something went wrong';
@@ -102,6 +132,35 @@ class OrdersController implements Controller {
                 });
                 reply({ errors }).code(statusCode);
             });
+    }
+
+    private _notify(recipients: Recipient[], template_id?: string, emailContent?: { subject: string; html?: string; text?: string; }) {
+        let subject: string;
+        let html: string;
+        let text: string;
+        if (!template_id && !emailContent) {
+            throw new Error('missing template_id and emailContent');
+        }
+        if (emailContent) {
+            subject = emailContent.subject;
+            html = emailContent.html;
+            text = emailContent.text;
+            if (!html && !text) {
+                throw new Error('missing html and text');
+            }
+        }
+        let transmission = {
+            recipients,
+            content: {
+                template_id,
+                use_draft_template: true,
+                subject,
+                html,
+                text
+            }
+        };
+
+        return this._mailer.send(transmission);
     }
 }
 
