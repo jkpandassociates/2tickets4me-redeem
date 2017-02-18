@@ -100,33 +100,39 @@ class OrdersController implements Controller {
         payload: getDBContext().validations.Order.options({ stripUnknown: true }),
 
     })
-    create(request: Request, reply: IReply) {
+    async create(request: Request, reply: IReply) {
         const orderValues = request.payload;
 
-        orderValues.IPAddress = request.headers['x-forwarded-for'] || request.info.remoteAddress;
+        try {
 
-        this._db.Order.create(orderValues)
-            .then(order => {
-                let orderData = order.toJSON();
-                orderData['ConfirmationUrl'] = `http://${process.env.HOST}/order/${orderData.SerialNumber}`;
-                this._notify([{
+            const accessCode = await this._db.AccessCode.findOne({ where: { Code: orderValues.CodeName } });
+
+            orderValues.IPAddress = request.headers['x-forwarded-for'] || request.info.remoteAddress;
+
+            const order = await this._db.Order.create(orderValues);
+
+            await accessCode.increment('UsedQuantity');
+
+            let orderData = order.toJSON();
+            orderData['ConfirmationUrl'] = `http://${process.env.HOST}/order/${orderData.SerialNumber}`;
+
+            await this._notify([
+                {
                     address: {
                         name: `${orderData.FirstName} ${orderData.LastName}`,
                         email: orderData.Email
                     },
                     substitution_data: orderData
-                }], notificationTemplates.AirlineOrderConfirmation)
-                    .then((data) => {
-                        console.log(data);
-                        reply({ data: order });
-                    })
-                    .catch(error => {
-                        reply(error);
-                    });
-            }).catch((error: Error) => {
+                }
+            ], notificationTemplates.AirlineOrderConfirmation);
+
+            reply({ data: order });
+
+        } catch (error) {
+            let statusCode = 500;
+            if (error instanceof Error) {
                 const errors: ApiErrors = [];
                 let detail = 'Something went wrong';
-                let statusCode = 500;
                 switch(error.message) {
                     case 'DUPLICATE':
                         detail = 'You are attempting to register multiple times.<br /><br />Please contact <a href="mailto:techsupport@2tickets4me.com">techsupport@2tickets4me.com</a> if you have a concern regarding your registration.';
@@ -138,8 +144,11 @@ class OrdersController implements Controller {
                     title: error.message,
                     detail: detail
                 });
-                reply({ errors }).code(statusCode);
-            });
+                error = { errors };
+            }
+
+            reply(error).code(statusCode);
+        }
     }
 
     private _notify(recipients: Recipient[], template_id?: string, emailContent?: { subject: string; html?: string; text?: string; }) {
