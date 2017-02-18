@@ -4,21 +4,25 @@ import { DB } from './db';
 // models
 import * as Order from './order.model';
 import * as AccessCode from './access-code.model';
+import * as Client from './client.model';
 
 function init(db: Sequelize.Sequelize, sync?: boolean) {
     const models = {
         Order: db.import('Order', Order.defineModel),
-        AccessCode: db.import('AccessCode', AccessCode.defineModel)
+        AccessCode: db.import('AccessCode', AccessCode.defineModel),
+        Client: db.import('Client', Client.defineModel)
     }
 
     const validations = {
         Order: Order.validations,
-        AccessCode: AccessCode.validations
+        AccessCode: AccessCode.validations,
+        Client: Client.validations
     }
 
     const associations = [
         Order.associate,
-        AccessCode.associate
+        AccessCode.associate,
+        Client.associate
     ];
 
     // apply associations

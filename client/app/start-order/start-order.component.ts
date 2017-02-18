@@ -27,20 +27,26 @@ export class StartOrderComponent implements OnInit {
     accessCode: string;
 
     onSubmit() {
+
         if (this.form.invalid) {
             return; // prevent invalid data being sent to the server
         }
+
+        // Show progress indicator bar
         this._progress.setProgressActive(true);
-        this._accessCode.isAccessCodeValid(this.accessCode).subscribe(result => {
-            let [valid, c] = result;
+
+        // Make sure access code is valid
+        this._accessCode.validate(this.accessCode).subscribe(valid => {
             if (valid) {
-                localStorage.setItem('access_code', this.accessCode);
-                console.log(`Valid Access Code: ${this.accessCode}`);
-                if (!c.SurveyUrl) {
-                    this._router.navigate(['/order']);
-                } else {
-                    location.href = c.SurveyUrl;
-                }
+                this._accessCode.getAccessCode(this.accessCode).subscribe(accessCode => {
+                    localStorage.setItem('access_code', this.accessCode);
+                    console.log(`Valid Access Code: ${this.accessCode}`);
+                    if (!accessCode.SurveyUrl) {
+                        this._router.navigate(['/order']);
+                    } else {
+                        location.href = accessCode.SurveyUrl;
+                    }
+                });
             } else {
                 let error = `Invalid Access Code: ${this.accessCode}`;
                 console.warn(error);
@@ -55,7 +61,8 @@ export class StartOrderComponent implements OnInit {
                 this.accessCode = null;
                 this.form.reset();
             }
-            // report error if valid = false
+
+            // Hide progress indicator bar
             this._progress.setProgressActive(false);
         });
     }

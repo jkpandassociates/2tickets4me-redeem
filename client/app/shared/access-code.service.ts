@@ -32,25 +32,12 @@ export class AccessCodeService {
             });
     }
 
-    isAccessCodeValid(code: string): Observable<[boolean, AccessCode]> {
-        return this.getAccessCode(code).map(c => {
-            if (!c) {
-                return [false, null];
-            }
-            const today = new Date();
-            let active = c.Active;
-            if (active && c.StartDate) {
-                let activeDate = new Date(c.StartDate);
-                active = today > activeDate;
-            }
-            if (active && c.ExpireDate) {
-                let expireDate = new Date(c.ExpireDate);
-                active = today < expireDate;
-            }
-            if (active && c.MaxQuantity) {
-                active = c.UsedQuantity < c.MaxQuantity;
-            }
-            return [active, c];
-        });
+    validate(code: string): Observable<boolean> {
+        const searchParams = new URLSearchParams(`code=${code}`);
+        return this._http.get('/api/accesscodes/validate', { search: searchParams })
+            .map(response => {
+                const data = response.json().data;
+                return data.valid;
+            });
     }
 }

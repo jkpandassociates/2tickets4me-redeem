@@ -49,35 +49,50 @@ class AccessCodesController implements Controller {
     async validateAccessCode(request: Request, reply: IReply) {
         const { code } = request.query;
         try {
-            let accessCode = await this._db.AccessCode.findOne({ where: { Code: code } });
-            let today = new Date();
+            const accessCode = await this._db.AccessCode.findOne({ where: { Code: code } });
+            const client = (accessCode) ? await this._db.Client.findById(accessCode.get('ClientId')) : null;
+            const today = new Date();
             let error: string;
             let valid = false;
+
             if (!accessCode || accessCode.get('Active') === false) {
+                // Not an error... but invalid
+            } else if (!client || client.get('Active') === false) {
                 // Not an error... but invalid
             } else if (accessCode.get('StartDate') && accessCode.get('StartDate') > today) {
                 error = `The access code start date is ${accessCode.get('StartDate')}. Today is ${today}. Use of this code has been denied.`;
             } else if (accessCode.get('ExpireDate') && accessCode.get('ExpireDate') < today) {
                 error = `The access code expire date is ${accessCode.get('ExpireDate')}. Today is ${today}. Use of this code has been denied.`;
             } else if (accessCode.get('MaxQuantity') && accessCode.get('UsedQuantity') && accessCode.get('MaxQuantity') <= accessCode.get('UsedQuantity')) {
-                error = 'The access code has been redeem the maximun number of times. Use of this code has been denied.';
+                error = 'The access code has been redeemed the maximun number of times. Use of this code has been denied.';
             } else {
                 valid = true;
             }
 
-            if (error) {
-                reply({ data: { valid } });
-                // TODO: get client and send notification to `client_email`.
-
-                // Send notification
-                // this._mailer.send({ }).then(() => {
-                //     reply({ data: { valid } });
-                // });
-            } else {
-                reply({ data: { valid } });
+            if (error && client) {
+                await this._mailer.send({
+                    recipients: [
+                        {
+                            address: {
+                                name: client.get('ContactName'),
+                                email: client.get('Email')
+                            },
+                            substitution_data: {
+                                CodeName: accessCode.get('Code'),
+                                ErrorMessage: error
+                            }
+                        }
+                    ],
+                    content: {
+                        template_id: '2tix-internal-error-occurred'
+                    }
+                });
             }
+
+            reply({ data: { valid } });
+
         } catch (error) {
-            debugger;
+            reply(error);
         }
     }
 
