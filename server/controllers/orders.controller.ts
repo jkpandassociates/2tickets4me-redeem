@@ -6,6 +6,13 @@ import * as moment from 'moment';
 import { getDBContext, DbContext } from '../models';
 import { Mailer } from '../infrastructure/mailer';
 
+const notificationTemplates = {
+    AirlineOrderConfirmation: '2tix-airline-order-confirmation',
+    CruiseOrderConfirmation: '2tix-cruise-order-confirmation',
+    InternalOrderConfirmation: '2tix-internal-confirmation',
+    ErrorOccurred: '2tix-internal-error-occurred'
+}
+
 @controller('/api/orders')
 class OrdersController implements Controller {
 
@@ -101,13 +108,14 @@ class OrdersController implements Controller {
         this._db.Order.create(orderValues)
             .then(order => {
                 let orderData = order.toJSON();
+                orderData['ConfirmationUrl'] = `http://${process.env.HOST}/order/${orderData.SerialNumber}`;
                 this._notify([{
                     address: {
                         name: `${orderData.FirstName} ${orderData.LastName}`,
                         email: orderData.Email
                     },
                     substitution_data: orderData
-                }], '2tix-airline-order-confirmation')
+                }], notificationTemplates.AirlineOrderConfirmation)
                     .then((data) => {
                         console.log(data);
                         reply({ data: order });
