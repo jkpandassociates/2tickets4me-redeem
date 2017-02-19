@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
+import { BehaviorSubject } from 'rxjs';
+
 @Injectable()
 export class TitleService {
 
-  constructor(public title: Title) { }
+  constructor(private _title: Title) { }
 
   private _baseTitle = '2tickets4me.com';
 
-  getTitle() {
-      return this.title.getTitle();
-  }
+  title = new BehaviorSubject<string>(this._baseTitle);
 
   setTitle(newTitle: string) {
       newTitle += ` | ${this._baseTitle}`;
-      this.title.setTitle(newTitle);
+      this.title.next(newTitle);
+      this._title.setTitle(newTitle);
   }
 
 }

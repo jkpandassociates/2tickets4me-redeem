@@ -1,5 +1,4 @@
-import { OnDestroy, Component,  OnInit, AfterViewChecked } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit} from '@angular/core';
 
 import { ProgressService } from '../../shared/progress.service';
 import { TitleService } from '../../shared/title.service';
@@ -9,7 +8,7 @@ import { TitleService } from '../../shared/title.service';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class HeaderComponent implements OnInit {
 
     constructor(
         private _progress: ProgressService,
@@ -18,20 +17,10 @@ export class HeaderComponent implements OnInit, OnDestroy, AfterViewChecked {
     title: string;
 
     showProgressBar: boolean;
-    showProgressBarSubscription: Subscription;
 
     ngOnInit() {
-        this.showProgressBarSubscription = this._progress.progressActive.subscribe(x => this.showProgressBar = x);
-    }
-
-    ngOnDestroy() {
-        this.showProgressBarSubscription.unsubscribe();
-    }
-
-    ngAfterViewChecked() {
-        setTimeout(() => {
-            this.title = this._title.getTitle();
-        }, 0);
+        this._progress.progressActive.subscribe(x => this.showProgressBar = x);
+        this._title.title.subscribe(title => this.title = title);
     }
 
 }
