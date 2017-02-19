@@ -1,6 +1,6 @@
 import { TwotixredeemPage } from './app.po';
 
-describe('twotixredeem App', function() {
+xdescribe('twotixredeem App', function() {
   let page: TwotixredeemPage;
 
   beforeEach(() => {

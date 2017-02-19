@@ -15,7 +15,9 @@
       "../node_modules/@types"
     ],
     "types": [
-        "typings"
+        "node",
+        "typings",
+        "jasmine"
     ]
   }
 }

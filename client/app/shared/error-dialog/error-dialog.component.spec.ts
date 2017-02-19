@@ -5,7 +5,7 @@ import { DebugElement } from '@angular/core';
 
 import { ErrorDialogComponent } from './error-dialog.component';
 
-describe('ErrorDialogComponent', () => {
+xdescribe('ErrorDialogComponent', () => {
   let component: ErrorDialogComponent;
   let fixture: ComponentFixture<ErrorDialogComponent>;
 

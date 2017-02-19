@@ -44,6 +44,7 @@
     "nodemon": "^1.11.0",
     "protractor": "~4.0.13",
     "source-map-loader": "^0.1.6",
+    "testdouble": "^1.11.1",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
     "typescript": "^2.1.5"
