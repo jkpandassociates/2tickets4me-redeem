@@ -1,11 +1,29 @@
 import { browser, element, by } from 'protractor';
 
 export class StartOrderPage {
-    async navigateTo() {
-        return await browser.get('/start-order');
+    navigateTo() {
+        return browser.get('/start-order');
     }
 
-    async getCardHeading() {
-        return await element(by.css('md-card-title')).getText();
+    async navigatedTo(url: string) {
+        const currentUrl = await browser.getCurrentUrl();
+        return currentUrl.endsWith(url);
+    }
+
+    getCardHeading() {
+        return element(by.css('md-card-title')).getText();
+    }
+
+    click(eleTarget: string) {
+        return element(by.css(eleTarget)).click();
+    }
+
+    enterAccessCode(code: string) {
+        return element(by.css('input')).sendKeys(code);
+    }
+
+    async hasErrorDialog() {
+        const count = await element.all(by.css('tix-error-dialog')).count();
+        return !!(count);
     }
 }
