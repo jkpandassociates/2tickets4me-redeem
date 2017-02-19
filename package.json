@@ -13,6 +13,7 @@
     "ng-serve": "ng serve --proxy-config proxy.conf.json -o",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor",
+    "ng-test": "ng test",
     "build": "tsc -p server && ng build --prod",
     "build:server": "tsc -p server",
     "build:client": "ng build --prod",
