@@ -5,7 +5,7 @@
 var SpecReporter = require('jasmine-spec-reporter');
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 30000,
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
@@ -21,6 +21,7 @@ exports.config = {
     print: function() {}
   },
   useAllAngular2AppRoots: true,
+  SELENIUM_PROMISE_MANAGER: false,
   beforeLaunch: function() {
     require('ts-node').register({
       project: 'e2e'
