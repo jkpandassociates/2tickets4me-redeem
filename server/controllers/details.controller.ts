@@ -13,7 +13,8 @@ class DetailController implements Controller {
     index(_: Request, reply: IReply) {
         reply({
             name: pkg.name,
-            version: pkg.version
+            version: pkg.version,
+            environment: process.env.NODE_ENV
         });
     }
 }
