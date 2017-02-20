@@ -26,13 +26,13 @@ describe('/start-order page', function () {
     });
 
     it('should show error dialog', async function() {
-        await page.enterAccessCode('foo');
+        await page.enterAccessCode('foo'); // Invalid code
         await page.click('button');
         return expect(await page.hasErrorDialog()).toBeTruthy();
     });
 
     it('should navigate to /order', async function() {
-        await page.enterAccessCode('2tickets');
+        await page.enterAccessCode('2ticketsDemo'); // Valid code
         await page.click('button');
         return expect(await page.navigatedTo('/order')).toBeTruthy();
     });
