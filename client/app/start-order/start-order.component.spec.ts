@@ -5,7 +5,7 @@ import { DebugElement } from '@angular/core';
 
 import { StartOrderComponent } from './start-order.component';
 
-xdescribe('StartOrderComponent', () => {
+describe('StartOrderComponent', () => {
   let component: StartOrderComponent;
   let fixture: ComponentFixture<StartOrderComponent>;
 

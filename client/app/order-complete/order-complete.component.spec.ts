@@ -5,7 +5,7 @@ import { DebugElement } from '@angular/core';
 
 import { OrderCompleteComponent } from './order-complete.component';
 
-xdescribe('OrderCompleteComponent', () => {
+describe('OrderCompleteComponent', () => {
   let component: OrderCompleteComponent;
   let fixture: ComponentFixture<OrderCompleteComponent>;
 

@@ -3,7 +3,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { AccessGuardService } from './access-guard.service';
 
-xdescribe('AccessGuardService', () => {
+describe('AccessGuardService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AccessGuardService]

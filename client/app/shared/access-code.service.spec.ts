@@ -3,7 +3,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { AccessCodeService } from './access-code.service';
 
-xdescribe('AccessCodeService', () => {
+describe('AccessCodeService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [AccessCodeService]

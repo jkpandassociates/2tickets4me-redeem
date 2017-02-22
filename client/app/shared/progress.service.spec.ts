@@ -3,7 +3,7 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 import { ProgressService } from './progress.service';
 
-xdescribe('ProgressService', () => {
+describe('ProgressService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [ProgressService]
