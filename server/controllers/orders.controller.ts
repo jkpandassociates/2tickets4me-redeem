@@ -1,4 +1,4 @@
-import { IRouteConfiguration, Request, IReply } from 'hapi';
+import { RouteConfiguration, Request, ReplyNoContinue } from 'hapi';
 import { controller, Controller, get, post, validate } from 'hapi-decorators';
 import * as Req from 'request';
 import * as moment from 'moment';
@@ -19,16 +19,11 @@ class OrdersController implements Controller {
     private _db: DbContext;
     private _mailer: Mailer;
 
-    constructor(getDBContext) {
-        this._db = getDBContext();
-        this._mailer = new Mailer();
-    }
-
     baseUrl: string;
-    routes: () => IRouteConfiguration[];
+    routes: () => RouteConfiguration[];
 
     @get('/')
-    getOrders(request: Request, reply: IReply) {
+    getOrders(request: Request, reply: ReplyNoContinue) {
         const {firstName, lastName, codeName, sponsor} = request.query;
 
         const where: any = {};
@@ -54,7 +49,7 @@ class OrdersController implements Controller {
     }
 
     @get('/{serial}')
-    getOrder(request: Request, reply: IReply) {
+    getOrder(request: Request, reply: ReplyNoContinue) {
         const serialNumber = request.params['serial'];
         this._db.Order.findOne({ where: { SerialNumber: serialNumber } })
             .then(order => {
@@ -67,7 +62,7 @@ class OrdersController implements Controller {
     }
 
     @get('/{serial}/regcard.png')
-    orderImage(request: Request, reply: IReply) {
+    orderImage(request: Request, reply: ReplyNoContinue) {
         const serialNumber = request.params['serial'];
         this._db.Order.findOne({ where: { SerialNumber: serialNumber } })
             .then(o => {
@@ -100,7 +95,7 @@ class OrdersController implements Controller {
         payload: getDBContext().validations.Order.options({ stripUnknown: true }),
 
     })
-    async create(request: Request, reply: IReply) {
+    async create(request: Request, reply: ReplyNoContinue) {
         const orderValues = request.payload;
 
         try {
@@ -179,6 +174,16 @@ class OrdersController implements Controller {
 
         return this._mailer.send(transmission);
     }
+
+    setDb(dbContext) {
+        this._db = dbContext;
+        return this;
+    }
+
+    setMailer(mailer) {
+        this._mailer = mailer;
+        return this;
+    }
 }
 
-export const orderRoutes = new OrdersController(getDBContext).routes();
+export const orderRoutes = new OrdersController().setDb(getDBContext()).setMailer(new Mailer()).routes();

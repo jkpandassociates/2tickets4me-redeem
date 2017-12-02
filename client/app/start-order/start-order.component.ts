@@ -1,4 +1,4 @@
-import { MdDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -19,7 +19,7 @@ export class StartOrderComponent implements OnInit {
         private _progress: ProgressService,
         private _accessCode: AccessCodeService,
         private _router: Router,
-        private _dialog: MdDialog,
+        private _dialog: MatDialog,
         private _title: TitleService) {}
 
     @ViewChild('startOrderForm') form: NgForm;

@@ -2,7 +2,19 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import {
+    MatButtonModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatProgressBarModule,
+    MatCardModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatFormFieldModule
+} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -31,10 +43,22 @@ import { TitleService } from './shared/title.service';
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
-        MaterialModule.forRoot(),
+        [
+            MatButtonModule,
+            MatDialogModule,
+            MatToolbarModule,
+            MatProgressBarModule,
+            MatCardModule,
+            MatInputModule,
+            MatSelectModule,
+            MatCheckboxModule,
+            MatRadioModule,
+            MatFormFieldModule
+        ],
         AppRoutingModule
     ],
     providers: [

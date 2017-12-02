@@ -1,4 +1,4 @@
-import { IRouteConfiguration, Request, IReply } from 'hapi';
+import { RouteConfiguration, Request, ReplyNoContinue } from 'hapi';
 import { controller, Controller, get, post, validate } from 'hapi-decorators';
 import * as Joi from 'joi';
 
@@ -18,16 +18,11 @@ class AccessCodesController implements Controller {
     private _db: DbContext;
     private _mailer: Mailer;
 
-    constructor(getDBContext) {
-        this._db = getDBContext();
-        this._mailer = new Mailer();
-    }
-
     baseUrl: string;
-    routes: () => IRouteConfiguration[];
+    routes: () => RouteConfiguration[];
 
     @get('/')
-    getAccessCodes(request: Request, reply: IReply): void {
+    getAccessCodes(request: Request, reply: ReplyNoContinue): void {
         const { code } = <{ [key: string]: string }>request.query;
         const where: any = {};
 
@@ -46,7 +41,7 @@ class AccessCodesController implements Controller {
             code: Joi.string().required()
         })
     })
-    async validateAccessCode(request: Request, reply: IReply) {
+    async validateAccessCode(request: Request, reply: ReplyNoContinue) {
         const { code } = request.query;
         try {
             const accessCode = await this._db.AccessCode.findOne({ where: { Code: code } });
@@ -100,7 +95,7 @@ class AccessCodesController implements Controller {
     @validate({
         payload: getDBContext().validations.AccessCode.options({ stripUnknown: true })
     })
-    create(request: Request, reply: IReply): void {
+    create(request: Request, reply: ReplyNoContinue): void {
         const accessCodeValues = request.payload;
         this._db.AccessCode.create(accessCodeValues)
             .then(accessCode => {
@@ -123,6 +118,16 @@ class AccessCodesController implements Controller {
                 reply({ errors }).code(statusCode);
             });
     }
+
+    setDb(dbContext) {
+        this._db = dbContext;
+        return this;
+    }
+
+    setMailer(mailer) {
+        this._mailer = mailer;
+        return this;
+    }
 }
 
-export const accessCodeRoutes = new AccessCodesController(getDBContext).routes();
+export const accessCodeRoutes = new AccessCodesController().setDb(getDBContext()).setMailer(new Mailer()).routes();

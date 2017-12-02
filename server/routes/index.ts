@@ -35,7 +35,7 @@ export function register(server: Server, _, next) {
     server.route({
         method: 'GET',
         path: '/{param*}',
-        handler: function(request, reply) {
+        handler: function(request, reply: any) {
             let pathParts = request.path.split('/');
             let requestedPath = join(__dirname, '..', '..', 'wwwroot', ...pathParts);
             let filePath = join(__dirname, '..', '..', 'wwwroot', 'index.html');

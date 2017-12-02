@@ -2,7 +2,7 @@
 
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { MaterialModule } from '@angular/material';
+import { MatButton, MatDialog } from '@angular/material';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { ProgressService } from './shared/progress.service';
@@ -13,7 +13,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        MaterialModule.forRoot()
+        [MatButton, MatDialog]
       ],
       declarations: [
         AppComponent,

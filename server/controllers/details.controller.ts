@@ -1,4 +1,4 @@
-import { IRouteConfiguration, Request, IReply } from 'hapi';
+import { RouteConfiguration, Request, ReplyNoContinue } from 'hapi';
 import { controller, Controller, get } from 'hapi-decorators';
 
 const pkg = require('../../package.json');
@@ -7,10 +7,10 @@ const pkg = require('../../package.json');
 class DetailController implements Controller {
 
     baseUrl: string;
-    routes: () => IRouteConfiguration[];
+    routes: () => RouteConfiguration[];
 
     @get('/')
-    index(_: Request, reply: IReply) {
+    index(_: Request, reply: ReplyNoContinue) {
         reply({
             name: pkg.name,
             version: pkg.version,

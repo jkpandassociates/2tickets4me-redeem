@@ -1,8 +1,8 @@
-@import '~@angular/material/core/theming/theming';
+@import '~@angular/material/theming';
 @import 'client/tix-theme.scss';
 
-[md-dialog-title] {
-    background-color: md-color($tix-warn);
+[mat-dialog-title] {
+    background-color: mat-color($tix-warn);
     padding: 10px 15px;
     color: #fff;
 }

@@ -16,8 +16,8 @@
     ],
     "types": [
         "node",
-        "typings",
         "jasmine"
-    ]
+    ],
+    "skipLibCheck": true
   }
 }

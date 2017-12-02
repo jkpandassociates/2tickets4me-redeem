@@ -1,4 +1,4 @@
-import { MdDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Component } from '@angular/core';
 
 @Component({
@@ -11,6 +11,6 @@ export class ErrorDialogComponent {
     title: string;
     message: string;
 
-    constructor(public dialogRef: MdDialogRef<ErrorDialogComponent>) { }
+    constructor(public dialogRef: MatDialogRef<ErrorDialogComponent>) { }
 
 }

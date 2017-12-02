@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Response } from '@angular/http';
-import { MdDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -19,7 +19,7 @@ export class OrderComponent implements OnInit {
     constructor(
         private _fb: FormBuilder,
         private _order: OrderService,
-        private _dialog: MdDialog,
+        private _dialog: MatDialog,
         private _route: Router,
         private _title: TitleService,
         private _progress: ProgressService) { }

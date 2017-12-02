@@ -2,7 +2,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { MaterialModule } from '@angular/material';
+import { MatButton, MatDialog } from '@angular/material';
 
 import { ProgressService } from '../../shared/progress.service';
 import { TitleService } from '../../shared/title.service';
@@ -14,7 +14,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ MaterialModule.forRoot() ],
+      imports: [ MatButton, MatDialog ],
       declarations: [ HeaderComponent ],
       providers: [ ProgressService, TitleService ]
     })
