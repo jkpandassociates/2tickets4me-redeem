@@ -5,33 +5,33 @@
             <mat-card-content>
                 <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" novalidate>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="First Name" formControlName="FirstName" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="First Name" formControlName="FirstName" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.FirstName" class="alert alert-warn">
                             {{orderFormErrors.FirstName}}
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="Last Name" formControlName="LastName" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Last Name" formControlName="LastName" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.LastName" class="alert alert-warn">
                             {{orderFormErrors.LastName}}
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="Mailing Address" formControlName="Address" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Mailing Address" formControlName="Address" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.Address" class="alert alert-warn">
                             {{orderFormErrors.Address}}
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="City" formControlName="City" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="City" formControlName="City" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.City" class="alert alert-warn">
                             {{orderFormErrors.City}}
                         </div>
@@ -49,57 +49,57 @@
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="Zip Code" formControlName="ZipCode" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Zip Code" formControlName="ZipCode" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.ZipCode" class="alert alert-warn">
                             {{orderFormErrors.ZipCode}}
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="Cell/Home Phone" formControlName="Phone" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Cell/Home Phone" formControlName="Phone" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.Phone" class="alert alert-warn">
                             {{orderFormErrors.Phone}}
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="Work Phone" formControlName="WorkPhone">
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Work Phone" formControlName="WorkPhone">
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.WorkPhone" class="alert alert-warn">
                             {{orderFormErrors.WorkPhone}}
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="Email Address" formControlName="Email" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Email Address" formControlName="Email" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.Email" class="alert alert-warn">
                             {{orderFormErrors.Email}}
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="Destination" formControlName="Destination" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Destination" formControlName="Destination" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.Destination" class="alert alert-warn">
                             {{orderFormErrors.Destination}}
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="Sponsor" formControlName="Sponsor" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Sponsor" formControlName="Sponsor" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.Sponsor" class="alert alert-warn">
                             {{orderFormErrors.Sponsor}}
                         </div>
                     </div>
                     <div>
-                        <mat-input-container class="full-width">
-                            <input mat-input placeholder="Authorization Rep" formControlName="RepresentativeName" required>
-                        </mat-input-container>
+                        <mat-form-field class="full-width">
+                            <input matInput placeholder="Authorization Rep" formControlName="RepresentativeName" required>
+                        </mat-form-field>
                         <div *ngIf="orderFormErrors.RepresentativeName" class="alert alert-warn">
                             {{orderFormErrors.RepresentativeName}}
                         </div>
