@@ -36,3 +36,6 @@ import 'zone.js/dist/zone';
 // NgClass on SVG elements
 // Needed for: IE10, IE11
 // import 'classlist.js';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
