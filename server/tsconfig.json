@@ -5,7 +5,8 @@
         "sourceMap": true,
         "experimentalDecorators": true,
         "noUnusedLocals": false,
-        "noUnusedParameters": true
+        "noUnusedParameters": true,
+        "outDir": "../lib"
     },
     "exclude": [
         "node_modules"
