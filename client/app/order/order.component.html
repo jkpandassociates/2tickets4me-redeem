@@ -108,7 +108,7 @@
                         <label>Date Issued</label> {{todaysDate | date}}
                     </div>
                     <div class="full-width cell">
-                        <label>I agree to the terms & conditions</label>
+                        <label>I agree to the <a href="http://2tickets4me.com/Air_Terms_%26_Condtions.html" target="_blank">terms &amp; conditions</a></label>
                         <mat-checkbox formControlName="AgreeToTerms" required></mat-checkbox>
                         <div *ngIf="orderFormErrors.AgreeToTerms" class="alert alert-warn">
                             {{orderFormErrors.AgreeToTerms}}
@@ -129,13 +129,13 @@
             <mat-card-content>
                 <ol>
                     <li>Fill out this form completely.</li>
-                    <li>After you submit this form you will receive an email with an <strong>E-Ticket Registration Card</strong>.</li>
-                    <li>Print out the registration card and mail it in to us <strong>within 30 days</strong> of Issue Date.<br />
+                    <li>After you submit this form you will receive an email with your <strong>E-Ticket Registration Card</strong>.</li>
+                    <li><strong>Print out</strong> the registration card and mail it in to us <strong>within 30 days</strong> of Issue Date.<br />
                     <span class="info">(mailing instructions will be included in your e-mail)</span></li>
                     <li>After we receive your registration card, we will then mail you a <strong>VACATION REQUEST FORM</strong>
-                    via USPS First Class Mail to fill out.</li>
+                    via USPS First Class Mail to fill out 60 days prior to your trip.</li>
                     <li>Your <strong>VACATION REQUEST FORM</strong> will have the phone number, fax number &amp; mailing address of our Travel Agency.
-                    Please contact them to discuss and finalize your trip details. </li>
+                    Please contact them to discuss, book and finalize your trip details. </li>
                 </ol>
                 <ul>
                     <li><strong>Sponsor</strong> is the business from whom you received your promotion from.</li>
@@ -144,13 +144,13 @@
                 </ul>
 
                 <p>
-                    You must have a valid e-mail address to participate in this promotion. We are not
-                    reponsible for invalid e-mail addresses or spam filters. To ensure you receive this
-                    promotion, please add <strong>postmaster@2tickets4me.com</strong> to your address book.
-                    We will not use, sell, or provide your e-mail address or contact information to anyone
-                    other than the Sponsor and/or Authorization Rep that gave you this promotion.
-                    If you have any problems submitting this form, DO NOT contact the Sponsor or
-                    Authorization Rep. Simply contact
+                    You must have a valid e-mail address to participate in this promotion.
+                    We are not responsible for invalid e-mail addresses or spam filters.
+                    To ensure you receive this promotion, please add <strong>postmaster@2tickets4me.com</strong>
+                    to your address book. We will not use, sell, or provide your e-mail address
+                    or contact information to anyone other than the Sponsor and/or Authorization Rep
+                    that gave you this promotion. If you have any problems submitting this form,
+                    DO NOT contact the Sponsor or Authorization Rep. Simply contact
                     <a href="mailto:techsupport@2tickets4me.com">techsupport@2tickets4me.com</a>
                 </p>
             </mat-card-content>
