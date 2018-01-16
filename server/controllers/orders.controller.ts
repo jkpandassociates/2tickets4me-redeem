@@ -5,6 +5,7 @@ import * as moment from 'moment';
 
 import { getDBContext, DbContext } from '../models';
 import { Mailer } from '../infrastructure/mailer';
+import { logger } from '../infrastructure/logger';
 
 const notificationTemplates = {
     AirlineOrderConfirmation: '2tix-airline-order-confirmation',

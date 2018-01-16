@@ -4,7 +4,7 @@ import * as Joi from 'joi';
 
 import { getDBContext, DbContext } from '../models';
 import { Mailer } from '../infrastructure/mailer';
-import { logger } from '../logger';
+import { logger } from '../infrastructure/logger';
 import { AccessCodeAttributes } from '../models/access-code.model';
 import { access } from 'fs';
 import { ClientAttributes } from '../models/client.model';
@@ -58,7 +58,7 @@ class AccessCodesController implements Controller {
         const where: any = {};
 
         if (code) {
-            where.Code = { $eq: `${code}` }
+            where.Code = { $eq: code }
         }
 
         this._db.AccessCode.findAll({ where }).then(accessCodes => {
@@ -78,7 +78,6 @@ class AccessCodesController implements Controller {
         const { code } = request.query;
         try {
             const { valid, accessCode, client, errorCode, errorMessage } = await this.validateAccessCode(code);
-            /* tslint:enable max-line-length */
 
             const errorsToNotifyClient = [
                 ErrorCode[ErrorCode.CODE_START_DATE_IN_FUTURE],
@@ -114,8 +113,8 @@ class AccessCodesController implements Controller {
             }
 
             if (valid !== true) {
-                logger.info(
-                    ['Invalid Access Code', errorMessage].join(': '),
+                logger.debug(
+                    `Invalid Access Code ${errorMessage ? ': ' + errorMessage : ''}`.trim(),
                     {
                         errorCode,
                         accessCode: (accessCode && accessCode.Code) || code

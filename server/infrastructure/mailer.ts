@@ -1,4 +1,5 @@
 import SparkPost = require('sparkpost');
+import { logger } from './logger';
 
 export class Mailer {
     private _client;
@@ -7,7 +8,7 @@ export class Mailer {
     }
 
     send(transmission: Transmission) {
-        if (process.env.NODE_ENV === 'debug') {
+        if (process.env.NODE_ENV === 'development') {
             transmission.recipients.forEach(r => {
                 const originalEmail = r.address.email;
                 r.address.email = process.env.DEBUG_EMAIL;
@@ -16,8 +17,12 @@ export class Mailer {
         }
         const s = (<(transmission: Transmission) => Promise<any>>this._client.transmissions.send);
         return s(transmission)
+            .then((response) => {
+                logger.debug('Mail Sent', transmission);
+                return response;
+            })
             .catch(error => {
-                console.error(error);
+                logger.error(error);
             });
     }
 }
