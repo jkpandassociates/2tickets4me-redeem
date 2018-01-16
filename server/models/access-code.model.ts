@@ -41,7 +41,7 @@ export function defineModel(sequelize: Sequelize.Sequelize, dataTypes: Sequelize
             allowNull: false,
             field: 'code_start',
             get: function getDate(this: AccessCodeInstance) {
-                let startTime = this.getDataValue('StartDate');
+                const startTime = this.getDataValue('StartDate');
                 if (startTime) {
                     const date = new Date(0);
                     date.setUTCSeconds(startTime);
@@ -136,7 +136,11 @@ export const validations = Joi.object({
     EmailAddressesToNotify: Joi.string().optional().allow(null)
 });
 
-function beforeValidate(this: Sequelize.Model<AccessCodeInstance, AccessCodeAttributes>, accessCode: AccessCodeInstance, _: Sequelize.DefineOptions<AccessCodeInstance>, done: (error?: any, value?: any) => any) {
+function beforeValidate(
+    this: Sequelize.Model<AccessCodeInstance, AccessCodeAttributes>,
+    accessCode: AccessCodeInstance, _: Sequelize.DefineOptions<AccessCodeInstance>,
+    done: (error?: any, value?: any) => any
+) {
     if (accessCode.isNewRecord) {
         // validate this is not a duplicate entry
         this.findAndCount({

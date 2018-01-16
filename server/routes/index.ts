@@ -36,8 +36,8 @@ export function register(server: Server, _, next) {
         method: 'GET',
         path: '/{param*}',
         handler: function(request, reply: any) {
-            let pathParts = request.path.split('/');
-            let requestedPath = join(__dirname, '..', '..', 'wwwroot', ...pathParts);
+            const pathParts = request.path.split('/');
+            const requestedPath = join(__dirname, '..', '..', 'wwwroot', ...pathParts);
             let filePath = join(__dirname, '..', '..', 'wwwroot', 'index.html');
 
             if (existsSync(requestedPath)) {

@@ -14,7 +14,7 @@ export class Mailer {
                 r.substitution_data['DebugMessage'] = `DEBUG: Email was intended to be sent to ${originalEmail}.`;
             });
         }
-        let s = (<(transmission: Transmission) => Promise<any>>this._client.transmissions.send);
+        const s = (<(transmission: Transmission) => Promise<any>>this._client.transmissions.send);
         return s(transmission)
             .catch(error => {
                 console.error(error);

@@ -2,7 +2,23 @@ import * as Sequelize from 'sequelize';
 import * as Joi from 'joi';
 import * as Moment from 'moment';
 
-export interface ClientAttributes {}
+export interface ClientAttributes {
+    Id: number;
+    Type: number;
+    ContactName: string;
+    StreetOne: string;
+    StreetTwo: string;
+    City: string;
+    State: string;
+    ZipCode: number;
+    Phone: string;
+    Email: string;
+    Active: boolean;
+    SurveyUrl: string;
+    SurveyPassword: string;
+    Notes: string;
+    CreatedAt: Date;
+}
 
 export interface ClientInstance extends Sequelize.Instance<ClientAttributes> {}
 
@@ -61,11 +77,11 @@ export function defineModel(sequelize: Sequelize.Sequelize, dataTypes: Sequelize
         Active: {
             type: dataTypes.INTEGER,
             field: 'client_enabled',
-            get: function getDate(this: ClientInstance) {
+            get: function getActive(this: ClientInstance): boolean {
                 const active: number = this.getDataValue('Active');
                 return !!(active);
             },
-            set: function setDate(this: ClientInstance, val: boolean) {
+            set: function setActive(this: ClientInstance, val: boolean) {
                 this.setDataValue('Active', val ? 1 : 0);
             }
         },
@@ -85,7 +101,7 @@ export function defineModel(sequelize: Sequelize.Sequelize, dataTypes: Sequelize
             type: dataTypes.INTEGER,
             allowNull: false,
             field: 'client_reg_date',
-            get: function getDate(this: ClientInstance) {
+            get: function getDate(this: ClientInstance): Date {
                 const expireTime = this.getDataValue('CreatedAt');
                 if (expireTime) {
                     const date = new Date(0);

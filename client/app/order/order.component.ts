@@ -158,7 +158,7 @@ export class OrderComponent implements OnInit {
 
         this._progress.setProgressActive(true);
 
-        let order: Order = this.orderForm.value;
+        const order: Order = this.orderForm.value;
         order.CodeName = localStorage.getItem('access_code');
 
         this._order.createOrder(order).subscribe((newOrder) => {
@@ -169,7 +169,7 @@ export class OrderComponent implements OnInit {
             // Error
             this._progress.setProgressActive(false);
             if (error instanceof Response) {
-                let response = error.json();
+                const response = error.json();
                 if (response.validation && response.validation.keys) {
                     const keys: string[] = response.validation.keys;
                     for (const field in this.orderFormErrors) {
@@ -181,8 +181,8 @@ export class OrderComponent implements OnInit {
                         }
                     }
                 } else if (response.errors) {
-                    let err = response.errors.shift();
-                    let dialogRef = this._dialog.open(ErrorDialogComponent, { role: 'alertdialog' });
+                    const err = response.errors.shift();
+                    const dialogRef = this._dialog.open(ErrorDialogComponent, { role: 'alertdialog' });
                     if (err.title) {
                         dialogRef.componentInstance.title = `${err.title}`;
                     }

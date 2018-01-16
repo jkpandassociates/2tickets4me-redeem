@@ -21,8 +21,8 @@ export class OrderPage {
     }
 
     async enterText(entries: Entries): Promise<void> {
-        for(const entry in entries) {
-            let value = entries[entry];
+        for (const entry in entries) {
+            const value = entries[entry];
             await element(by.css(`[formcontrolname="${entry}"]`)).sendKeys(value);
         }
     }

@@ -72,6 +72,8 @@ class OrdersController implements Controller {
                 }
                 const order = o.toJSON();
                 const issueDate = moment(order.Date).format('L');
+
+                // TODO: Needs to be migrated to serverless service
                 let imageUrl = 'http://2tickets4me.com/2tickets4me/images/regcard.php';
                 imageUrl += `?name=${order.FirstName} ${order.LastName}`;
                 imageUrl += `&email=${order.Email}`;
@@ -108,7 +110,7 @@ class OrdersController implements Controller {
 
             await accessCode.increment('UsedQuantity');
 
-            let orderData = order.toJSON();
+            const orderData = order.toJSON();
             orderData['ConfirmationUrl'] = `http://${process.env.HOST}/order/${orderData.SerialNumber}`;
 
             await this._notify([
@@ -128,9 +130,11 @@ class OrdersController implements Controller {
             if (error instanceof Error) {
                 const errors: ApiErrors = [];
                 let detail = 'Something went wrong';
-                switch(error.message) {
+                switch (error.message) {
                     case 'DUPLICATE':
-                        detail = 'You are attempting to register multiple times.<br /><br />Please contact <a href="mailto:techsupport@2tickets4me.com">techsupport@2tickets4me.com</a> if you have a concern regarding your registration.';
+                        detail = 'You are attempting to register multiple times.<br /><br />' +
+                                 'Please contact <a href="mailto:techsupport@2tickets4me.com">techsupport@2tickets4me.com</a>' +
+                                 'if you have a concern regarding your registration.';
                         statusCode = 422;
                         break;
                 }
@@ -161,7 +165,7 @@ class OrdersController implements Controller {
                 throw new Error('missing html and text');
             }
         }
-        let transmission = {
+        const transmission = {
             recipients,
             content: {
                 template_id,

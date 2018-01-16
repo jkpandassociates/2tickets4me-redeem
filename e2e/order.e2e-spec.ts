@@ -21,7 +21,7 @@ describe('/order page', function () {
     });
 
     it('should display a card heading', async function() {
-        let cardHeading = await page.getCardHeading();
+        const cardHeading = await page.getCardHeading();
         return expect(cardHeading).toEqual('E-Ticket Registration Form');
     });
 

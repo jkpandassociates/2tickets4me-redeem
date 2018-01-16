@@ -48,9 +48,9 @@ export class StartOrderComponent implements OnInit {
                     }
                 });
             } else {
-                let error = `Invalid Access Code: ${this.accessCode}`;
+                const error = `Invalid Access Code: ${this.accessCode}`;
                 console.warn(error);
-                let dialogRef = this._dialog.open(ErrorDialogComponent, { role: 'alertdialog' });
+                const dialogRef = this._dialog.open(ErrorDialogComponent, { role: 'alertdialog' });
                 dialogRef.componentInstance.title = `${error}`;
                 dialogRef.componentInstance.message = `
                 The access code entered is either expired or invalid.

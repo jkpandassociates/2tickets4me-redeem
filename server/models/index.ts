@@ -26,7 +26,7 @@ function init(db: Sequelize.Sequelize, sync?: boolean) {
     ];
 
     // apply associations
-    for(let association of associations) {
+    for (const association of associations) {
         association(db);
     }
 
@@ -42,7 +42,7 @@ function init(db: Sequelize.Sequelize, sync?: boolean) {
 }
 
 export function getDBContext() {
-    const sync = (process.env.DB_SYNC && process.env.DB_SYNC === "true");
+    const sync = (process.env.DB_SYNC && process.env.DB_SYNC === 'true');
     const {models, validations} = init(DB, sync);
     return { db: DB, ...models, validations };
 }

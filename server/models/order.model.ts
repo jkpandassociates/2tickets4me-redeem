@@ -154,7 +154,11 @@ export const validations = Joi.object({
     RepresentativeName: Joi.string().required()
 });
 
-function beforeValidate(this: Sequelize.Model<OrderInstance, OrderAttributes>, order: OrderInstance, _: Sequelize.DefineOptions<OrderInstance>, done: (error?: any, value?: any) => any) {
+function beforeValidate(
+    this: Sequelize.Model<OrderInstance, OrderAttributes>,
+    order: OrderInstance, _: Sequelize.DefineOptions<OrderInstance>,
+    done: (error?: any, value?: any) => any
+) {
     if (order.isNewRecord) {
         order.set('Date', new Date());
         order.set('SerialNumber', generateSerialNumber());
@@ -208,12 +212,12 @@ function generateSerialNumber(): string {
     return `${num}-${date}`;
 }
 
-function randomNumber(length: number = 1){
-    let num: string = '20';
+function randomNumber(length = 1) {
+    let num = '20';
 
     for (let i = 0; i < length - 2; i++) {
         num += Math.floor((Math.random() * 10)); // 0 - 9
     }
 
-	return num;
+    return num;
 }

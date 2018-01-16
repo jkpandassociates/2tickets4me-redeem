@@ -11,6 +11,7 @@ const appMetaData = `
  ***********************************/
 `;
 
+// tslint:disable-next-line:no-console
 console.info(appMetaData);
 
 if (environment.production) {
