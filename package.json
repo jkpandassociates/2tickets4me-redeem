@@ -1,6 +1,6 @@
 {
   "name": "twotixredeem",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "ISC",
   "scripts": {
     "postinstall": "npm run lint && npm run build",
