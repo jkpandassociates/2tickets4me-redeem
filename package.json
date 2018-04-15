@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "npm run lint && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start index.js -n ridic -i max",
+    "start": "pm2 start index.js -n 2tickets4me-redeem -i max",
     "restart": "pm2 restart all",
     "debug": "npm run build && nodemon --debug",
     "debug:server": "nodemon --debug -e ts --exec \"ts-node\" -- --project server server/index.ts",
