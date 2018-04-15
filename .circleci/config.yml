@@ -21,6 +21,9 @@ jobs:
       - image: circleci/node:6.12.3
     steps:
       - run:
+          name: Lint
+          command: yarn lint
+      - run:
           name: Run Tests
           command: echo "No Tests"
   deploy-prod:
