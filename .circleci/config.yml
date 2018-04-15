@@ -1,72 +1,84 @@
+defaults: &defaults
+  working_directory: ~/circleci-deployment
+  docker:
+    - image: circleci/node:6.12.3
+
 version: 2
 jobs:
-  build:
-    working_directory: ~/2tickets4me-redeem
-    docker:
-      - image: circleci/node:6.12.3
+  checkout_code:
+    <<: *defaults
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/circleci-deployment
       - restore_cache:
-          key: 2tix-yarn-{{ checksum "yarn.lock" }}
-      - run:
-          name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn
+          keys:
+            - yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-cache-{{ .Branch }}
+            - yarn-cache-
+      - run: yarn install
       - save_cache:
-          key: 2tix-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
+          key: yarn-cache-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths: node_modules
+      - persist_to_workspace:
+          root: .
+          paths: .
+  build:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/circleci-deployment
+      - run: yarn install
       - run:
           name: Build
           command: yarn build-prod
-      - persist_to_workspace:
-          root: workspace
-          paths:
-            - echo-output
-  test:
-    - attach_workspace:
-        at: /tmp/workspace
-    working_directory: ~/2tickets4me-redeem
-    docker:
-      - image: circleci/node:6.12.3
+  lint:
+    <<: *defaults
     steps:
-      - checkout
+      - attach_workspace:
+          at: ~/circleci-deployment
+      - run: yarn install
       - run:
           name: Lint
           command: yarn lint
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/circleci-deployment
+      - run: yarn install
       - run:
           name: Run Tests
           command: echo "No Tests"
   deploy-prod:
-    docker:
-      - image: circleci/node:6.12.3
-    working_directory: ~/2tickets4me-redeem
+    <<: *defaults
     steps:
       - add_ssh_keys:
           fingerprints:
             - "81:1a:e9:ce:aa:c9:0b:e7:9a:85:d1:98:9b:62:f7:64"
       - run:
           name: Deploy Production
-          command: ssh -o "StrictHostKeyChecking no" $SSHUSER@$PROD_SERVER "cd ~/2tickets4me-redeem; git checkout master; git reset --hard origin/master; git pull origin master; yarn; yarn build-prod; yarn restart;"
+          command: ssh -o "StrictHostKeyChecking no" $SSHUSER@$PROD_SERVER "cd ~/circleci-deployment; git checkout master; git reset --hard origin/master; git pull origin master; yarn; yarn build-prod; yarn restart;"
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
+      - checkout_code
       - build:
-          filters:
-            tags:
-              only: /.*/
+          requires:
+            - checkout_code
+      - lint:
+          requires:
+            - checkout_code
       - test:
           requires:
-            - build
-          filters:
-            tags:
-              only: /.*/
+            - checkout_code
       - deploy-prod:
           requires:
+            - lint
             - test
+            - build
           filters:
-            tags:
-              only: /.*/
             branches:
               only: master
