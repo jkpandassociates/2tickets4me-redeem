@@ -5,6 +5,10 @@ export const DB = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, pr
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
     dialectOptions: {
-        encrypt: true
+        encrypt: true,
+        ssl: {
+            // TODO: set up your ca correctly to trust the connection
+            rejectUnauthorized: false
+        }
     }
 });
