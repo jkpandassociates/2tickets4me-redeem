@@ -15,11 +15,15 @@ jobs:
           key: 2tix-yarn-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      - run:
+        name: Build
+        command: yarn build-prod
   test:
     working_directory: ~/2tickets4me-redeem
     docker:
       - image: circleci/node:6.12.3
     steps:
+      - checkout
       - run:
           name: Lint
           command: yarn lint
