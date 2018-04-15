@@ -16,8 +16,8 @@ jobs:
           paths:
             - ~/.cache/yarn
       - run:
-        name: Build
-        command: yarn build-prod
+          name: Build
+          command: yarn build-prod
   test:
     working_directory: ~/2tickets4me-redeem
     docker:
