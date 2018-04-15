@@ -18,7 +18,13 @@ jobs:
       - run:
           name: Build
           command: yarn build-prod
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - echo-output
   test:
+    - attach_workspace:
+        at: /tmp/workspace
     working_directory: ~/2tickets4me-redeem
     docker:
       - image: circleci/node:6.12.3
