@@ -5,7 +5,8 @@
   "scripts": {
     "postinstall": "npm run lint && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "pm2 start index.js -n ridic -i max",
+    "restart": "pm2 restart all",
     "debug": "npm run build && nodemon --debug",
     "debug:server": "nodemon --debug -e ts --exec \"ts-node\" -- --project server server/index.ts",
     "debug-brk": "nodemon --debug-brk -e ts --exec \"npm run build && ts-node\" -- --project server server/index.ts",
@@ -77,6 +78,7 @@
     "joi": "^10.6.0",
     "moment": "^2.19.3",
     "mysql": "^2.15.0",
+    "pm2": "^2.10.2",
     "rxjs": "^5.5.3",
     "sequelize": "^3.31.1",
     "sparkpost": "^2.1.2",
