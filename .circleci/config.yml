@@ -58,7 +58,7 @@ jobs:
             - "81:1a:e9:ce:aa:c9:0b:e7:9a:85:d1:98:9b:62:f7:64"
       - run:
           name: Deploy Production
-          command: ssh -o "StrictHostKeyChecking no" $SSHUSER@$PROD_SERVER "cd ~/circleci-deployment; git checkout master; git reset --hard origin/master; git pull origin master; yarn; yarn build-prod; yarn restart;"
+          command: ssh -o "StrictHostKeyChecking no" $SSHUSER@$PROD_SERVER "cd ~/2tickets4me-redeem; git checkout master; git reset --hard origin/master; git pull origin master; yarn; yarn build-prod; yarn restart;"
 
 workflows:
   version: 2
