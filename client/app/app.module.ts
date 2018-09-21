@@ -16,6 +16,8 @@ import {
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { Angulartics2Module } from 'angulartics2';
+import { Angulartics2GoogleTagManager } from 'angulartics2/gtm';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -59,7 +61,8 @@ import { TitleService } from './shared/title.service';
             MatRadioModule,
             MatFormFieldModule
         ],
-        AppRoutingModule
+        AppRoutingModule,
+        Angulartics2Module.forRoot([ Angulartics2GoogleTagManager ])
     ],
     providers: [
         ProgressService,

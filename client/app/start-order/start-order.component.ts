@@ -2,6 +2,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Angulartics2 } from 'angulartics2';
 
 import { ProgressService } from '../shared/progress.service';
 import { AccessCodeService } from '../shared/access-code.service';
@@ -20,7 +21,8 @@ export class StartOrderComponent implements OnInit {
         private _accessCode: AccessCodeService,
         private _router: Router,
         private _dialog: MatDialog,
-        private _title: TitleService) {}
+        private _title: TitleService,
+        private _analytics: Angulartics2) {}
 
     @ViewChild('startOrderForm') form: NgForm;
 
@@ -41,6 +43,10 @@ export class StartOrderComponent implements OnInit {
                 this._accessCode.getAccessCode(this.accessCode).subscribe(accessCode => {
                     localStorage.setItem('access_code', this.accessCode);
                     console.log(`Valid Access Code: ${this.accessCode}`);
+                    this._analytics.eventTrack.next({
+                        action: 'click',
+                        properties: { category: 'access-code', valid: true, value: this.accessCode },
+                      });
                     if (!accessCode.SurveyUrl) {
                         this._router.navigate(['/order']);
                     } else {
@@ -50,6 +56,10 @@ export class StartOrderComponent implements OnInit {
             } else {
                 const error = `Invalid Access Code: ${this.accessCode}`;
                 console.warn(error);
+                this._analytics.eventTrack.next({
+                    action: 'click',
+                    properties: { category: 'access-code', valid: false, value: this.accessCode },
+                  });
                 const dialogRef = this._dialog.open(ErrorDialogComponent, { role: 'alertdialog' });
                 dialogRef.componentInstance.title = `${error}`;
                 dialogRef.componentInstance.message = `

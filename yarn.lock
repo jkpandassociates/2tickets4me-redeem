@@ -444,6 +444,12 @@ amp@0.3.1, amp@~0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/amp/-/amp-0.3.1.tgz#6adf8d58a74f361e82c1fa8d389c079e139fc47d"
 
+angulartics2@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/angulartics2/-/angulartics2-5.3.0.tgz#edee3ba4f69a123e71a5423c7ff661e7de79a13c"
+  dependencies:
+    tslib "^1.7.1"
+
 ansi-align@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ansi-align/-/ansi-align-2.0.0.tgz#c36aeccba563b89ceb556f3690f0b1d9e3547f7f"
