@@ -1,6 +1,6 @@
 {
     "name": "twotixredeem",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "license": "ISC",
     "scripts": {
         "build-prod": "npm run build:server && npm run build:client",
