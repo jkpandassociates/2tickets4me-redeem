@@ -1,3 +1,13 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/jkpandassociates/2tickets4me-redeem/compare/v0.1.2...v0.2.0) (2018-09-22)
+
+
+### Bug Fixes
+
+* **db:** allow non-ssl connections ([9743f0c](https://github.com/jkpandassociates/2tickets4me-redeem/commit/9743f0c))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/kenhowardpdx/2tickets4me-redeem/compare/v0.1.1...0.1.2) (2018-01-12)
 
