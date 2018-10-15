@@ -7,12 +7,15 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "lint": "tslint"
+    "lint:server": "tslint --project ./packages/server",
+    "lint": "yarn lint:server"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
+    "@types/node": "^10.11.7",
+    "lerna": "^3.4.3",
     "prettier": "1.14.3",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
