@@ -1,20 +1,19 @@
-import { compose } from "glue";
-import { join } from "path";
-import { existsSync } from "fs";
+import { join } from 'path';
+import { existsSync } from 'fs';
+import init from './init';
 
-if (existsSync(join(__dirname, "..", ".env"))) {
-  require("dotenv").config(); // Load environment variables
+if (
+  existsSync(
+    join(
+      __dirname /* src|dist */,
+      '..' /* server */,
+      '..' /* packages */,
+      '..' /* root */,
+      '.env'
+    )
+  )
+) {
+  require('dotenv').config(); // Load environment variables
 }
 
-import { get } from "./manifest";
-
-compose(
-  get("/"),
-  { relativeTo: __dirname },
-  (_, server) => {
-    const web: typeof server = <any>server.select("web");
-    server.start(() =>
-      server.log("info", "Server running at: " + web.info.uri)
-    );
-  }
-);
+init();

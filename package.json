@@ -1,12 +1,12 @@
 {
   "name": "2tickets4me-redeem",
   "version": "0.2.0",
-  "main": "index.js",
   "repository": "git@github.com:jkpandassociates/2tickets4me-redeem.git",
   "author": "Ken Howard <ken@simplicatedweb.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "lint:server": "tslint --project ./packages/server",
     "lint": "yarn lint:server"
   },

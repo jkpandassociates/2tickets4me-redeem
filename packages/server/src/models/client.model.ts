@@ -1,6 +1,6 @@
 import * as Sequelize from 'sequelize';
 import * as Joi from 'joi';
-import * as Moment from 'moment';
+import moment from 'moment';
 
 export interface ClientAttributes {
     Id: number;
@@ -107,12 +107,12 @@ export function defineModel(sequelize: Sequelize.Sequelize, dataTypes: Sequelize
                     const date = new Date(0);
                     date.setUTCSeconds(expireTime);
                     return date;
-                } else {
-                    return null;
                 }
+
+                return null;
             },
             set: function setDate(this: ClientInstance, val: Date) {
-                const timestamp = Moment(val).unix();
+                const timestamp = moment(val).unix();
                 this.setDataValue('CreatedAt', timestamp);
             }
         }

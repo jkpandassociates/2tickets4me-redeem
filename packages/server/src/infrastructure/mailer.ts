@@ -1,28 +1,36 @@
-import SparkPost = require('sparkpost');
+import sparkpost from 'sparkpost';
 import { logger } from './logger';
 
 export class Mailer {
-    private _client;
-    constructor(apiKey?: string) {
-        this._client = new SparkPost(apiKey);
+  private _client;
+  constructor(apiKey?: string) {
+    try {
+      this._client = new sparkpost(apiKey);
+    } catch (e) {
+      logger.error(e);
     }
+  }
 
-    send(transmission: Transmission) {
-        if (process.env.NODE_ENV === 'development') {
-            transmission.recipients.forEach(r => {
-                const originalEmail = r.address.email;
-                r.address.email = process.env.DEBUG_EMAIL;
-                r.substitution_data['DebugMessage'] = `DEBUG: Email was intended to be sent to ${originalEmail}.`;
-            });
-        }
-        const s = (<(transmission: Transmission) => Promise<any>>this._client.transmissions.send);
-        return s(transmission)
-            .then((response) => {
-                logger.debug('Mail Sent', transmission);
-                return response;
-            })
-            .catch(error => {
-                logger.error(error);
-            });
+  send(transmission: Transmission) {
+    if (process.env.NODE_ENV === 'development') {
+      transmission.recipients.forEach(r => {
+        const originalEmail = r.address.email;
+        r.address.email = process.env.DEBUG_EMAIL;
+        r.substitution_data[
+          'DebugMessage'
+        ] = `DEBUG: Email was intended to be sent to ${originalEmail}.`;
+      });
     }
+    const s = <(transmission: Transmission) => Promise<any>>(
+      this._client.transmissions.send
+    );
+    return s(transmission)
+      .then(response => {
+        logger.debug('Mail Sent', transmission);
+        return response;
+      })
+      .catch(error => {
+        logger.error(error);
+      });
+  }
 }
