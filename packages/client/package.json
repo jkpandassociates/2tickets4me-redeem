@@ -1,0 +1,32 @@
+{
+  "name": "twotixredeem-client",
+  "version": "0.2.0",
+  "description": "angular client",
+  "main": "index.ts",
+  "dependencies": {
+    "@angular/animations": "^7.0.0",
+    "@angular/cdk": "^7.0.0",
+    "@angular/common": "^7.0.0",
+    "@angular/compiler": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "@angular/forms": "^7.0.0",
+    "@angular/http": "^7.0.0",
+    "@angular/material": "^7.0.0",
+    "@angular/platform-browser": "^7.0.0",
+    "@angular/platform-browser-dynamic": "^7.0.0",
+    "@angular/router": "^7.0.0",
+    "zone.js": "^0.8.26"
+  },
+  "devDependencies": {
+    "@angular/cli": "^1.5.5",
+    "@angular/compiler-cli": "^5.0.5"
+  },
+  "scripts": {
+    "build": "ng build",
+    "serve": "ng serve --proxy-config proxy.conf.json -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

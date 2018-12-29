@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+
+    <span>{{title}}</span>
+
+    <span class="spacer"></span>
+
+</mat-toolbar>
+<div [hidden]="!showProgressBar">
+    <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+</div>
