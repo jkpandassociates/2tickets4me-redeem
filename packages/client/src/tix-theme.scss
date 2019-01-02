@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$tix-primary:   mat-palette($mat-light-blue);
+$tix-accent:    mat-palette($mat-amber, A200, A100, A400);
+$tix-warn:      mat-palette($mat-deep-orange);
+$tix-theme:     mat-light-theme($tix-primary, $tix-accent, $tix-warn);
+
+@include angular-material-theme($tix-theme);

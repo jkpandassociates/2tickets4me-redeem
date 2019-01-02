@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 declare var require: any;
 
-const pkg = require('../../package.json');
+const pkg = require('../package.json');
 
 export const environment = {
   name: pkg.name,

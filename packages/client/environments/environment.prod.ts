@@ -1,6 +1,6 @@
 declare var require: any;
 
-const pkg = require('../../package.json');
+const pkg = require('../package.json');
 
 export const environment = {
   name: pkg.name,
