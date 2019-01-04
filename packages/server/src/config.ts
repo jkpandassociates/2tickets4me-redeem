@@ -26,8 +26,7 @@ const config = {
     router: {
       isCaseSensitive: true,
       stripTrailingSlash: true
-    },
-    labels: ['web']
+    }
   },
   good: {
     ops: {

@@ -1,15 +1,16 @@
 import { compose } from 'glue';
 import { get } from './manifest';
 
-export default function initialize() {
-  compose(
+const init = async () => {
+  const server = await compose(
     get('/'),
-    { relativeTo: __dirname },
-    (_, server) => {
-      const web: typeof server = <any>server.select('web');
-      server.start(() =>
-        server.log('info', 'Server running at: ' + web.info.uri)
-      );
-    }
+    { relativeTo: __dirname }
   );
-}
+  await server.start();
+  server.log(
+    'info',
+    `Server running on ${server.settings.uri}:${server.settings.port}`
+  );
+};
+
+export { init };

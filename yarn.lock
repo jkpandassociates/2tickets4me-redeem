@@ -1002,6 +1002,13 @@
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-1.0.6.tgz#3e02972728c69248c2af08d60a48cbb8680fffdf"
 
+"@types/glue@^5.0.4":
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/@types/glue/-/glue-5.0.4.tgz#495818e3e97773b78cdb5e790c79ed29474fe017"
+  integrity sha512-vfPSCmieu6mOvmwbzmd+v9Obt5P2gY9VyLnbYPHbNFkgi2IYFULiQuUhqTfbwnzTizR9P8ww0eWiTqOz8rzMdA==
+  dependencies:
+    "@types/hapi" "*"
+
 "@types/hapi-decorators@^0.4.11":
   version "0.4.11"
   resolved "https://registry.yarnpkg.com/@types/hapi-decorators/-/hapi-decorators-0.4.11.tgz#3ba17d6ac34e988bfd547732ab2a43c4c3dbafbb"
@@ -1010,20 +1017,7 @@
     "@types/hapi" "^16"
     "@types/joi" "*"
 
-"@types/hapi@^16":
-  version "16.1.15"
-  resolved "https://registry.yarnpkg.com/@types/hapi/-/hapi-16.1.15.tgz#38047379c13f612042f18d52dcb05fff79f4e037"
-  dependencies:
-    "@types/boom" "^4"
-    "@types/catbox" "^7"
-    "@types/events" "*"
-    "@types/joi" "*"
-    "@types/mimos" "*"
-    "@types/node" "*"
-    "@types/podium" "*"
-    "@types/shot" "*"
-
-"@types/hapi@^17.8.2":
+"@types/hapi@*", "@types/hapi@^17.8.2":
   version "17.8.2"
   resolved "https://registry.yarnpkg.com/@types/hapi/-/hapi-17.8.2.tgz#667fbeff250c338dca9e6cc1779f5696c7c148ed"
   integrity sha512-UP+Z+NN5c55hu96j68kx04uIsUWxElc3H2JSoFm4I7ltmOlIqtn/tZIuSVeeRABKz3NWNG6X7wHyL2N+tgm6lA==
@@ -1031,6 +1025,19 @@
     "@types/boom" "*"
     "@types/catbox" "*"
     "@types/iron" "*"
+    "@types/joi" "*"
+    "@types/mimos" "*"
+    "@types/node" "*"
+    "@types/podium" "*"
+    "@types/shot" "*"
+
+"@types/hapi@^16":
+  version "16.1.15"
+  resolved "https://registry.yarnpkg.com/@types/hapi/-/hapi-16.1.15.tgz#38047379c13f612042f18d52dcb05fff79f4e037"
+  dependencies:
+    "@types/boom" "^4"
+    "@types/catbox" "^7"
+    "@types/events" "*"
     "@types/joi" "*"
     "@types/mimos" "*"
     "@types/node" "*"

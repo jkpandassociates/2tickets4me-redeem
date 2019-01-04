@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { existsSync } from 'fs';
-import init from './init';
+import { init } from './init';
 
 if (
   existsSync(

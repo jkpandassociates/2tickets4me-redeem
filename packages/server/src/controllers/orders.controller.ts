@@ -1,4 +1,4 @@
-import { RouteConfiguration, Request, ReplyNoContinue } from 'hapi';
+import { Request } from 'hapi';
 import { controller, Controller, get, post, validate } from 'hapi-decorators';
 import * as Req from 'request';
 import moment from 'moment';
@@ -20,10 +20,10 @@ class OrdersController implements Controller {
   private _mailer: Mailer;
 
   baseUrl: string;
-  routes: () => RouteConfiguration[];
+  routes: () => any[];
 
   @get('/')
-  getOrders(request: Request, reply: ReplyNoContinue) {
+  getOrders(request: Request, reply: any) {
     const { firstName, lastName, codeName, sponsor } = request.query;
 
     const where: any = {};
@@ -43,30 +43,28 @@ class OrdersController implements Controller {
 
     this._db.Order.findAll({
       where
-    }).then(orders => {
+    }).then((orders) => {
       reply({ data: orders });
     });
   }
 
   @get('/{serial}')
-  getOrder(request: Request, reply: ReplyNoContinue) {
+  async getOrder(request: Request) {
     const serialNumber = request.params['serial'];
-    this._db.Order.findOne({ where: { SerialNumber: serialNumber } }).then(
-      order => {
-        if (!order) {
-          reply(new Error('Invalid Serial Number'));
-          return;
-        }
-        reply({ data: order });
-      }
-    );
+    const order = await this._db.Order.findOne({
+      where: { SerialNumber: serialNumber }
+    });
+    if (!order) {
+      throw new Error('Invalid Serial Number');
+    }
+    return { data: order };
   }
 
   @get('/{serial}/regcard.png')
   orderImage(request: Request, reply: ReplyNoContinue) {
     const serialNumber = request.params['serial'];
     this._db.Order.findOne({ where: { SerialNumber: serialNumber } }).then(
-      o => {
+      (o) => {
         if (!o) {
           reply(new Error('Invalid Serial Number'));
           return;
@@ -87,7 +85,7 @@ class OrdersController implements Controller {
         imageUrl += `&c=${order.CodeName}`;
         imageUrl += `&serial=${order.SerialNumber}`;
         imageUrl += `&date=${issueDate}`;
-        Req(imageUrl).on('response', response => {
+        Req(imageUrl).on('response', (response) => {
           reply(response).header('Content-Type', 'image/png');
         });
       }

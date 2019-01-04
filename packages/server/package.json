@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start:debug": "nodemon --inspect -e ts,json --exec \"ts-node\" -- --files src/index.ts",
-    "start": "node ./dist",
+    "start": "ts-node ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -34,6 +34,7 @@
     "@types/confidence": "^1.4.30",
     "@types/hapi": "^17.8.2",
     "@types/hapi-decorators": "^0.4.11",
+    "@types/glue": "^5.0.4",
     "@types/joi": "^14.0.1",
     "@types/moment": "^2.13.0",
     "@types/node": "^10.12.18",

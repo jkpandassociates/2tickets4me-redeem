@@ -2,14 +2,14 @@ import { Server } from 'hapi';
 import { join } from 'path';
 import { existsSync } from 'fs';
 
-import { orderRoutes } from '../controllers/orders.controller';
-import { accessCodeRoutes } from '../controllers/access-codes.controller';
-import { detailRoutes } from '../controllers/details.controller';
+// import { orderRoutes } from '../controllers/orders.controller';
+// import { accessCodeRoutes } from '../controllers/access-codes.controller';
+// import { detailRoutes } from '../controllers/details.controller';
 
 export function register(server: Server, _, next) {
-  server.route(orderRoutes);
-  server.route(accessCodeRoutes);
-  server.route(detailRoutes);
+  // server.route(orderRoutes);
+  // server.route(accessCodeRoutes);
+  // server.route(detailRoutes);
 
   server.route({
     method: 'GET',
