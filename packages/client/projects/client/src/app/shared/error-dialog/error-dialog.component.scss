@@ -1,5 +1,5 @@
 @import '~@angular/material/theming';
-@import 'src/tix-theme.scss';
+@import '../../../tix-theme.scss';
 
 [mat-dialog-title] {
     background-color: mat-color($tix-warn);
